@@ -18,9 +18,9 @@
   --muted:#444;
   --muted2:#888;
   --green:#22c55e;
-  --red:#ef4444;
-  --blue:#3b82f6;
   --yellow:#eab308;
+  --blue:#3b82f6;
+  --red:#ef4444;
 }
 html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden;}
 button{font-family:'Syne',sans-serif;cursor:pointer;}
@@ -28,7 +28,6 @@ button{font-family:'Syne',sans-serif;cursor:pointer;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-@keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
 @keyframes glitch1{0%,95%,100%{transform:none;opacity:1}96%{transform:translate(-3px,1px);opacity:0.8}97%{transform:translate(3px,-1px);opacity:0.9}98%{transform:translate(-1px,2px);opacity:0.8}99%{transform:none;opacity:1}}
 @keyframes glitch2{0%,95%,100%{clip-path:none;transform:none}96%{clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);transform:translate(4px,0)}97%{clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%);transform:translate(-4px,0)}98%{clip-path:none}}
 @keyframes rowIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
@@ -39,12 +38,6 @@ button{font-family:'Syne',sans-serif;cursor:pointer;}
   position:fixed;inset:0;pointer-events:none;z-index:999;opacity:0.03;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-size:128px;
-}
-.scanline{
-  position:fixed;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(transparent,rgba(255,255,255,0.04),transparent);
-  animation:scanline 6s linear infinite;
-  pointer-events:none;z-index:998;
 }
 
 .tabs-bar{
@@ -94,9 +87,12 @@ button{font-family:'Syne',sans-serif;cursor:pointer;}
   color:var(--text);
   animation:glitch1 8s infinite,glitch2 8s infinite;
 }
-.home-hero p{
-  font-size:15px;color:var(--muted2);line-height:1.7;max-width:380px;
+.hero-icon{
+  display:block;
+  width:48px;height:48px;
+  margin-top:24px;
   animation:fadeUp 0.5s 0.2s ease both;
+  image-rendering:pixelated;
 }
 .hero-btns{
   display:flex;gap:10px;margin-top:32px;
@@ -135,7 +131,6 @@ button{font-family:'Syne',sans-serif;cursor:pointer;}
 
 .section-head{padding:44px 0 28px;border-bottom:1px solid var(--border);}
 .section-head h2{font-size:32px;font-weight:800;letter-spacing:-1px;}
-.section-head p{font-size:11px;color:var(--muted);margin-top:6px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;}
 
 .script-item{
   display:flex;align-items:center;gap:20px;
@@ -262,7 +257,6 @@ button{font-family:'Syne',sans-serif;cursor:pointer;}
 <body>
 
 <div class="noise"></div>
-<div class="scanline"></div>
 
 <div class="tabs-bar">
   <button class="tab on" onclick="go('home',this)">Home</button>
@@ -277,7 +271,7 @@ button{font-family:'Syne',sans-serif;cursor:pointer;}
   <div id="home" class="page on">
     <div class="home-hero">
       <h1 data-text="dope">dope</h1>
-      <p>These are the dopest scripts ever!1!</p>
+      <img src="lulwut.ico" class="hero-icon" alt="icon">
       <div class="hero-btns">
         <button class="btn btn-primary" onclick="go('scripts',document.querySelectorAll('.tab')[1])">View Scripts</button>
         <button class="btn btn-outline" onclick="go('executors',document.querySelectorAll('.tab')[2])">Executors</button>
@@ -292,7 +286,6 @@ button{font-family:'Syne',sans-serif;cursor:pointer;}
   <div id="scripts" class="page">
     <div class="section-head">
       <h2>Scripts</h2>
-      <p>dope scripts 😎</p>
     </div>
     <div class="script-item">
       <div class="script-num">1</div>
