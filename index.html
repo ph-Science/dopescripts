@@ -5,477 +5,456 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>dope | RBX</title>
 <link rel="icon" type="image/x-icon" href="lulwut.ico">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0a0a0a;
-  --bg2:#111;
-  --bg3:#1a1a1a;
-  --border:#1e1e1e;
-  --border2:#2a2a2a;
-  --text:#f5f5f5;
-  --muted:#444;
-  --muted2:#888;
-  --green:#22c55e;
-  --yellow:#eab308;
-  --blue:#3b82f6;
-  --red:#ef4444;
+--bg:#080808;
+--s1:#0d0d0d;
+--s2:#141414;
+--l1:#1a1a1a;
+--l2:#242424;
+--fg:#f0f0f0;
+--d1:#555;
+--d2:#888;
+--g:#1dba6a;
+--y:#c9a030;
+--b:#4080d0;
+--r:#c03020;
 }
-html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden;}
-button{font-family:'Syne',sans-serif;cursor:pointer;}
+html,body{min-height:100vh;background:var(--bg);color:var(--fg);font-family:'Geist',sans-serif;overflow-x:hidden;}
+button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none;}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:none}
+}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-@keyframes glitch1{0%,95%,100%{transform:none;opacity:1}96%{transform:translate(-3px,1px);opacity:0.8}97%{transform:translate(3px,-1px);opacity:0.9}98%{transform:translate(-1px,2px);opacity:0.8}99%{transform:none;opacity:1}}
-@keyframes glitch2{0%,95%,100%{clip-path:none;transform:none}96%{clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);transform:translate(4px,0)}97%{clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%);transform:translate(-4px,0)}98%{clip-path:none}}
-@keyframes rowIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
-@keyframes tabSwitch{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(245,245,245,0.15)}50%{box-shadow:0 0 0 6px rgba(245,245,245,0)}}
-
-.noise{
-  position:fixed;inset:0;pointer-events:none;z-index:999;opacity:0.03;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size:128px;
+@keyframes blink{0%,100%{opacity:1}45%,55%{opacity:0.1}}
+@keyframes rowIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes g1{0%,93%,100%{transform:none}94%{transform:translate(-2px,1px)}96%{transform:translate(2px,-1px)}98%{transform:none}}
+@keyframes g2{0%,93%,100%{clip-path:none}94%{clip-path:polygon(0 18%,100% 18%,100% 38%,0 38%);transform:translateX(3px)}96%{clip-path:polygon(0 62%,100% 62%,100% 82%,0 82%);transform:translateX(-3px)}98%{clip-path:none}}
+@keyframes tabSlide{
+  from{opacity:0;transform:translateY(-6px)}
+  to{opacity:1;transform:none}
+}
+@keyframes indicatorIn{
+  from{opacity:0;transform:scaleX(0)}
+  to{opacity:1;transform:scaleX(1)}
 }
 
-.tabs-bar{
+.topbar{
   display:flex;justify-content:center;
-  padding:32px 0 0;gap:2px;
-  animation:fadeIn 0.4s ease both;
+  padding:36px 0 0;
+  animation:tabSlide 0.5s cubic-bezier(0.22,1,0.36,1) both;
+}
+.tabs{
+  display:flex;align-items:center;gap:2px;
+  background:var(--s1);
+  border:1px solid var(--l1);
+  border-radius:10px;
+  padding:4px;
 }
 .tab{
-  background:transparent;border:none;
-  color:var(--muted2);font-size:12px;font-weight:700;
-  padding:9px 22px;border-radius:7px;
-  transition:background 0.2s,color 0.2s,transform 0.1s;
-  text-transform:uppercase;letter-spacing:1px;
-  position:relative;overflow:hidden;
+  position:relative;
+  color:var(--d2);font-size:12px;font-weight:500;
+  padding:8px 20px;border-radius:7px;
+  transition:color 0.2s;
+  letter-spacing:0.01em;
+  z-index:1;
 }
-.tab::after{
-  content:'';position:absolute;bottom:0;left:50%;right:50%;
-  height:1px;background:var(--text);
-  transition:left 0.2s,right 0.2s;
+.tab:hover{color:var(--fg);}
+.tab.on{color:var(--fg);}
+.tab-bg{
+  position:absolute;inset:0;border-radius:7px;
+  background:var(--l1);
+  opacity:0;
+  transition:opacity 0.2s;
+  z-index:-1;
 }
-.tab:hover{color:var(--text);}
-.tab:hover::after{left:10%;right:10%;}
-.tab:active{transform:scale(0.96);}
-.tab.on{color:var(--text);}
-.tab.on::after{left:10%;right:10%;}
+.tab.on .tab-bg{opacity:1;}
+.tab-dot{
+  display:inline-block;
+  width:4px;height:4px;border-radius:50%;
+  background:var(--g);
+  margin-left:6px;vertical-align:middle;
+  opacity:0;transition:opacity 0.2s;
+  animation:blink 2.5s infinite;
+}
+.tab.on .tab-dot{opacity:1;}
 
-.tabs-divider{height:1px;background:var(--border);margin:16px 0 0;}
+.wrap{max-width:800px;margin:0 auto;padding:0 44px 120px;}
+.page{display:none;}
+.page.on{display:block;animation:pageIn 0.3s cubic-bezier(0.22,1,0.36,1) both;}
 
-.wrap{max-width:860px;margin:0 auto;padding:0 40px 100px;}
-
-.page{display:none;animation:tabSwitch 0.25s ease both;}
-.page.on{display:block;}
-
-.home-hero{
-  padding:90px 0 60px;
-  border-bottom:1px solid var(--border);
+.hero{padding:72px 0 52px;}
+.hero-pre{
+  font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--d1);margin-bottom:24px;
+  animation:fadeUp 0.5s 0.05s cubic-bezier(0.22,1,0.36,1) both;
 }
-.home-hero h1{
-  font-size:96px;font-weight:800;letter-spacing:-5px;
-  line-height:0.9;margin-bottom:20px;
-  animation:fadeUp 0.5s 0.1s ease both;
-  position:relative;display:inline-block;
+.hero-h{
+  font-size:96px;font-weight:800;letter-spacing:-0.06em;line-height:0.9;
+  animation:fadeUp 0.5s 0.1s cubic-bezier(0.22,1,0.36,1) both;
+  position:relative;display:inline-block;color:var(--fg);
 }
-.home-hero h1::before{
-  content:attr(data-text);
-  position:absolute;inset:0;
-  color:var(--text);
-  animation:glitch1 8s infinite,glitch2 8s infinite;
+.hero-h::before{
+  content:attr(data-text);position:absolute;inset:0;color:var(--fg);
+  animation:g1 10s infinite,g2 10s infinite;
 }
-.hero-icon{
-  display:block;
-  width:48px;height:48px;
-  margin-top:24px;
-  animation:fadeUp 0.5s 0.2s ease both;
-  image-rendering:pixelated;
+.hero-ico{
+  display:block;width:32px;height:32px;margin-top:24px;
+  image-rendering:pixelated;opacity:0.5;
+  animation:fadeUp 0.5s 0.15s cubic-bezier(0.22,1,0.36,1) both;
 }
 .hero-btns{
-  display:flex;gap:10px;margin-top:32px;
-  animation:fadeUp 0.5s 0.3s ease both;
+  display:flex;gap:8px;margin-top:28px;
+  animation:fadeUp 0.5s 0.2s cubic-bezier(0.22,1,0.36,1) both;
 }
 .btn{
-  padding:11px 24px;border-radius:7px;
-  font-size:12px;font-weight:700;letter-spacing:1px;
-  border:1px solid var(--border2);
-  transition:all 0.2s;text-transform:uppercase;
-  position:relative;overflow:hidden;
+  padding:10px 20px;border-radius:7px;font-size:12px;font-weight:600;
+  letter-spacing:0.01em;transition:all 0.18s;
 }
-.btn::before{
-  content:'';position:absolute;inset:0;
-  background:rgba(255,255,255,0.06);
-  transform:translateX(-100%);
-  transition:transform 0.3s;
-}
-.btn:hover::before{transform:translateX(0);}
-.btn-primary{background:var(--text);color:var(--bg);border-color:transparent;}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(255,255,255,0.15);}
-.btn-primary::before{background:rgba(0,0,0,0.08);}
-.btn-outline{background:transparent;color:var(--muted2);}
-.btn-outline:hover{color:var(--text);border-color:var(--muted2);}
+.btn:active{transform:scale(0.97);}
+.btn-solid{background:var(--fg);color:var(--bg);}
+.btn-solid:hover{opacity:0.88;}
+.btn-outline{background:transparent;color:var(--d2);border:1px solid var(--l2);}
+.btn-outline:hover{color:var(--fg);border-color:var(--d1);}
 
-.home-stat{
-  padding:36px 0;border-bottom:1px solid var(--border);
-  animation:fadeUp 0.5s 0.4s ease both;
+.stat{
+  padding:28px 0;border-top:1px solid var(--l1);
+  animation:fadeUp 0.5s 0.25s cubic-bezier(0.22,1,0.36,1) both;
 }
-.hstat-n{
-  font-size:52px;font-weight:800;letter-spacing:-2.5px;margin-bottom:6px;
-  transition:letter-spacing 0.3s;
+.stat-n{
+  font-size:52px;font-weight:800;letter-spacing:-0.04em;line-height:1;
+  margin-bottom:6px;transition:letter-spacing 0.3s;
 }
-.home-stat:hover .hstat-n{letter-spacing:-1px;}
-.hstat-l{font-size:10px;letter-spacing:2.5px;color:var(--muted);text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.stat:hover .stat-n{letter-spacing:-0.02em;}
+.stat-l{
+  font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--d1);
+}
 
-.section-head{padding:44px 0 28px;border-bottom:1px solid var(--border);}
-.section-head h2{font-size:32px;font-weight:800;letter-spacing:-1px;}
-
-.script-item{
-  display:flex;align-items:center;gap:20px;
-  padding:24px 0;border-bottom:1px solid var(--border);
-  transition:padding-left 0.2s;
-  animation:fadeUp 0.3s ease both;
+.sec{display:flex;align-items:baseline;justify-content:space-between;padding:40px 0 20px;}
+.sec h2{font-size:24px;font-weight:700;letter-spacing:-0.03em;}
+.sec-tag{
+  font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--d1);
 }
-.script-item:nth-child(2){animation-delay:0.05s;}
-.script-item:nth-child(3){animation-delay:0.1s;}
-.script-item:hover{padding-left:6px;}
-.script-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);min-width:18px;}
+
+.divider{height:1px;background:var(--l1);}
+
+.script{
+  display:flex;align-items:center;gap:14px;
+  padding:18px 0;border-bottom:1px solid var(--l1);
+  transition:padding-left 0.2s cubic-bezier(0.22,1,0.36,1);
+  animation:fadeUp 0.35s cubic-bezier(0.22,1,0.36,1) both;
+}
+.script:nth-child(1){animation-delay:0.05s;}
+.script:nth-child(2){animation-delay:0.1s;}
+.script:hover{padding-left:6px;}
+.script-n{
+  font-family:'Geist Mono',monospace;font-size:10px;color:var(--d1);min-width:22px;
+}
 .script-info{flex:1;}
-.script-name{font-size:17px;font-weight:700;margin-bottom:6px;letter-spacing:-0.3px;}
-.script-meta{display:flex;align-items:center;gap:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
-.tag-online{color:var(--green);display:flex;align-items:center;gap:6px;}
-.tag-online::before{
-  content:'';width:5px;height:5px;background:var(--green);
-  border-radius:50%;display:block;
-  box-shadow:0 0 6px var(--green);
-  animation:blink 2s infinite;
+.script-title{font-size:15px;font-weight:600;letter-spacing:-0.01em;margin-bottom:4px;}
+.online{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:'Geist Mono',monospace;font-size:9px;
+  letter-spacing:0.15em;text-transform:uppercase;color:var(--g);
 }
-.script-btns{display:flex;gap:8px;flex-shrink:0;}
+.dot{width:5px;height:5px;border-radius:50%;background:currentColor;animation:blink 2.5s infinite;}
+.sbtns{display:flex;gap:7px;flex-shrink:0;}
 .sbtn{
-  padding:9px 18px;border-radius:7px;
-  font-size:11px;font-weight:700;letter-spacing:0.8px;
-  border:1px solid var(--border2);
-  transition:all 0.2s;text-transform:uppercase;
+  padding:7px 14px;border-radius:6px;font-size:10px;font-weight:600;
+  letter-spacing:0.02em;transition:all 0.18s;
 }
-.sbtn-copy{background:var(--text);color:var(--bg);border-color:transparent;}
-.sbtn-copy:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,255,255,0.2);animation:pulse 1s infinite;}
-.sbtn-copy:active{transform:scale(0.95);}
-.sbtn-copy.did-copy{background:var(--green);color:#000;box-shadow:0 0 20px rgba(34,197,94,0.4);}
-.sbtn-game{background:transparent;color:var(--muted2);}
-.sbtn-game:hover{color:var(--text);border-color:var(--muted2);}
+.sbtn:active{transform:scale(0.96);}
+.sbtn-c{background:var(--fg);color:var(--bg);}
+.sbtn-c:hover{opacity:0.85;}
+.sbtn-c.ok{background:var(--g);color:#000;}
+.sbtn-g{background:transparent;color:var(--d2);border:1px solid var(--l2);}
+.sbtn-g:hover{color:var(--fg);border-color:var(--d1);}
 
-.exec-filter{
-  display:flex;gap:8px;padding:22px 0;
-  border-bottom:1px solid var(--border);flex-wrap:wrap;
+.filters{
+  display:flex;gap:5px;padding:16px 0;
+  border-bottom:1px solid var(--l1);flex-wrap:wrap;
 }
-.filter-btn{
-  padding:6px 14px;border-radius:20px;
-  font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:500;
-  border:1px solid var(--border2);background:transparent;
-  color:var(--muted2);transition:all 0.2s;letter-spacing:0.5px;
+.f{
+  padding:4px 12px;border-radius:100px;font-size:10px;
+  font-family:'Geist Mono',monospace;
+  border:1px solid var(--l2);background:transparent;
+  color:var(--d2);transition:all 0.18s;
 }
-.filter-btn:hover{color:var(--text);border-color:var(--muted2);}
-.filter-btn.on{background:var(--text);color:var(--bg);border-color:var(--text);}
+.f:hover{color:var(--fg);border-color:var(--d1);}
+.f.on{background:var(--fg);color:var(--bg);border-color:var(--fg);}
 
-.exec-grid{display:flex;flex-direction:column;}
-.exec-row{
-  display:grid;
-  grid-template-columns:24px 1fr 90px 90px 90px 100px;
-  align-items:center;gap:16px;
-  padding:16px 0;border-bottom:1px solid var(--border);
-  font-size:13px;
-  opacity:0;
-  animation:rowIn 0.25s ease forwards;
+.etable{width:100%;border-collapse:collapse;}
+.etable th{
+  font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--d1);
+  padding:10px 0 10px;border-bottom:1px solid var(--l2);
+  text-align:left;font-weight:400;
 }
-.exec-row.head{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--muted);border-bottom:1px solid var(--border2);
-  padding:14px 0;opacity:1;animation:none;
+.etable td{
+  padding:13px 0;border-bottom:1px solid var(--l1);
+  font-size:13px;vertical-align:middle;
 }
-.exec-idx{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
-.exec-name{font-weight:700;letter-spacing:-0.2px;}
-.exec-sub{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:3px;}
-.badge{
+.etable tbody tr{
+  opacity:0;animation:rowIn 0.2s ease forwards;
+  transition:background 0.15s;
+}
+.en{font-weight:600;letter-spacing:-0.01em;margin-bottom:2px;}
+.esub{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1);}
+.chip{
   display:inline-flex;align-items:center;
-  padding:3px 9px;border-radius:4px;
-  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.5px;
+  padding:2px 7px;border-radius:3px;
+  font-family:'Geist Mono',monospace;font-size:9px;font-weight:600;
 }
-.bg-free{background:rgba(34,197,94,0.1);color:var(--green);}
-.bg-paid{background:rgba(234,179,8,0.08);color:var(--yellow);}
-.bg-det{background:rgba(239,68,68,0.08);color:var(--red);}
-.bg-safe{background:rgba(34,197,94,0.1);color:var(--green);}
-.bg-upd{background:rgba(59,130,246,0.08);color:var(--blue);}
-.bg-old{background:rgba(239,68,68,0.08);color:var(--red);}
-.exec-perc{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted2);}
-.exec-perc b{color:var(--text);}
-.loading-msg,.err-msg{padding:56px 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;}
-.loading-msg{color:var(--muted);}
-.err-msg{color:var(--red);}
+.cf{background:rgba(29,186,106,0.08);color:var(--g);}
+.cp{background:rgba(201,160,48,0.08);color:var(--y);}
+.cs{background:rgba(29,186,106,0.08);color:var(--g);}
+.cd{background:rgba(192,48,32,0.08);color:var(--r);}
+.cu{background:rgba(64,128,208,0.08);color:var(--b);}
+.co{background:rgba(192,48,32,0.08);color:var(--r);}
+.unc{font-family:'Geist Mono',monospace;font-size:10px;color:var(--d2);}
+.unc b{color:var(--fg);}
 
-.rbx-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px;}
-.rbx-card{
-  background:var(--bg2);border:1px solid var(--border);
-  border-radius:10px;padding:22px;
+.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;}
+.vcard{
+  background:var(--s1);border:1px solid var(--l1);
+  border-radius:8px;padding:18px;
   transition:border-color 0.2s,transform 0.2s;
-  animation:fadeUp 0.3s ease both;
+  animation:fadeUp 0.3s cubic-bezier(0.22,1,0.36,1) both;
 }
-.rbx-card:nth-child(2){animation-delay:0.08s;}
-.rbx-card:nth-child(3){animation-delay:0.16s;}
-.rbx-card:hover{border-color:var(--border2);transform:translateY(-2px);}
-.rbx-card-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
-.rbx-row{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);}
-.rbx-row:last-child{border-bottom:none;}
-.rbx-platform{font-size:13px;font-weight:700;}
-.rbx-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:3px;}
-.rbx-ver{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted2);text-align:right;word-break:break-all;max-width:200px;}
+.vcard:nth-child(2){animation-delay:0.07s;}
+.vcard:nth-child(3){animation-delay:0.14s;}
+.vcard:hover{border-color:var(--l2);transform:translateY(-1px);}
+.vcard-h{
+  font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--d1);margin-bottom:12px;
+}
+.vrow{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:8px 0;border-bottom:1px solid var(--l1);
+}
+.vrow:last-child{border-bottom:none;}
+.vplat{font-size:13px;font-weight:600;}
+.vdate{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1);margin-top:2px;}
+.vver{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d2);text-align:right;max-width:170px;word-break:break-all;}
+
+.msg{padding:48px 0;text-align:center;font-family:'Geist Mono',monospace;font-size:10px;color:var(--d1);}
+.merr{color:var(--r);}
 
 .toast{
-  position:fixed;bottom:28px;right:28px;
-  background:var(--text);color:var(--bg);
-  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
-  letter-spacing:2px;text-transform:uppercase;
-  padding:12px 22px;border-radius:7px;
-  z-index:1000;pointer-events:none;
-  opacity:0;transform:translateY(16px) scale(0.95);
-  transition:all 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  position:fixed;bottom:22px;right:22px;
+  background:var(--fg);color:var(--bg);
+  font-family:'Geist Mono',monospace;font-size:9px;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;
+  padding:10px 18px;border-radius:6px;z-index:9999;pointer-events:none;
+  opacity:0;transform:translateY(10px) scale(0.95);
+  transition:all 0.22s cubic-bezier(0.34,1.4,0.64,1);
 }
-.toast.show{opacity:1;transform:translateY(0) scale(1);}
+.toast.show{opacity:1;transform:none;}
 
-@media(max-width:640px){
-  .wrap{padding:0 20px 60px;}
-  .home-hero h1{font-size:64px;letter-spacing:-3px;}
-  .rbx-grid{grid-template-columns:1fr;}
-  .exec-row{grid-template-columns:16px 1fr 80px 80px;}
-  .exec-row > *:nth-child(5),.exec-row > *:nth-child(6){display:none;}
+@media(max-width:580px){
+  .wrap{padding:0 22px 80px;}
+  .hero-h{font-size:60px;}
+  .vgrid{grid-template-columns:1fr;}
   .tab{padding:8px 14px;font-size:11px;}
 }
 </style>
 </head>
 <body>
 
-<div class="noise"></div>
-
-<div class="tabs-bar">
-  <button class="tab on" onclick="go('home',this)">Home</button>
-  <button class="tab" onclick="go('scripts',this)">Scripts</button>
-  <button class="tab" onclick="go('executors',this)">Executors</button>
-  <button class="tab" onclick="go('roblox',this)">Roblox</button>
+<div class="topbar">
+  <div class="tabs">
+    <button class="tab on" onclick="go('home',this)">
+      <span class="tab-bg"></span>Home<span class="tab-dot"></span>
+    </button>
+    <button class="tab" onclick="go('scripts',this)">
+      <span class="tab-bg"></span>Scripts
+    </button>
+    <button class="tab" onclick="go('executors',this)">
+      <span class="tab-bg"></span>Executors
+    </button>
+    <button class="tab" onclick="go('roblox',this)">
+      <span class="tab-bg"></span>Roblox
+    </button>
+  </div>
 </div>
-<div class="tabs-divider"></div>
 
 <div class="wrap">
 
   <div id="home" class="page on">
-    <div class="home-hero">
-      <h1 data-text="dope">dope</h1>
-      <img src="lulwut.ico" class="hero-icon" alt="icon">
+    <div class="hero">
+      <h1 class="hero-h" data-text="dope">dope</h1>
+      <img src="lulwut.ico" class="hero-ico" alt="">
       <div class="hero-btns">
-        <button class="btn btn-primary" onclick="go('scripts',document.querySelectorAll('.tab')[1])">View Scripts</button>
+        <button class="btn btn-solid" onclick="go('scripts',document.querySelectorAll('.tab')[1])">View Scripts</button>
         <button class="btn btn-outline" onclick="go('executors',document.querySelectorAll('.tab')[2])">Executors</button>
       </div>
     </div>
-    <div class="home-stat">
-      <div class="hstat-n" id="stat-count">2</div>
-      <div class="hstat-l">Scripts Active</div>
+    <div class="divider"></div>
+    <div class="stat">
+      <div class="stat-n">2</div>
+      <div class="stat-l">Scripts Active</div>
     </div>
   </div>
 
   <div id="scripts" class="page">
-    <div class="section-head">
-      <h2>Scripts</h2>
-    </div>
-    <div class="script-item">
-      <div class="script-num">1</div>
+    <div class="sec"><h2>Scripts</h2><span class="sec-tag">2 active</span></div>
+    <div class="divider"></div>
+    <div class="script">
+      <div class="script-n">01</div>
       <div class="script-info">
-        <div class="script-name">Murder Drones RP</div>
-        <div class="script-meta">
-          <span class="tag-online">online</span>
-        </div>
+        <div class="script-title">Murder Drones RP</div>
+        <span class="online"><span class="dot"></span>online</span>
       </div>
-      <div class="script-btns">
-        <button class="sbtn sbtn-copy" onclick="cp(this,'loadstring(game:HttpGet(&quot;https://dopescripts.vercel.app/murderdronesrp.lua&quot;))()')">Copy</button>
-        <button class="sbtn sbtn-game" onclick="window.open('https://www.roblox.com/games/11451679682','_blank')">↗ Game</button>
+      <div class="sbtns">
+        <button class="sbtn sbtn-c" onclick="cp(this,'loadstring(game:HttpGet(&quot;https://dopescripts.vercel.app/murderdronesrp.lua&quot;))()')">Copy</button>
+        <button class="sbtn sbtn-g" onclick="window.open('https://www.roblox.com/games/11451679682','_blank')">Game ↗</button>
       </div>
     </div>
-    <div class="script-item">
-      <div class="script-num">2</div>
+    <div class="script">
+      <div class="script-n">02</div>
       <div class="script-info">
-        <div class="script-name">Eat Jelly For Brainrots</div>
-        <div class="script-meta">
-          <span class="tag-online">online</span>
-        </div>
+        <div class="script-title">Eat Jelly For Brainrots</div>
+        <span class="online"><span class="dot"></span>online</span>
       </div>
-      <div class="script-btns">
-        <button class="sbtn sbtn-copy" onclick="cp(this,'loadstring(game:HttpGet(&quot;https://dopescripts.vercel.app/eatjellyforbrainrots.lua&quot;))()')">Copy</button>
-        <button class="sbtn sbtn-game" onclick="window.open('https://www.roblox.com/games/96169782836983','_blank')">↗ Game</button>
+      <div class="sbtns">
+        <button class="sbtn sbtn-c" onclick="cp(this,'loadstring(game:HttpGet(&quot;https://dopescripts.vercel.app/eatjellyforbrainrots.lua&quot;))()')">Copy</button>
+        <button class="sbtn sbtn-g" onclick="window.open('https://www.roblox.com/games/96169782836983','_blank')">Game ↗</button>
       </div>
     </div>
   </div>
 
   <div id="executors" class="page">
-    <div class="section-head">
-      <h2>Executors</h2>
-      <p>Live</p>
+    <div class="sec"><h2>Executors</h2><span class="sec-tag">Live</span></div>
+    <div class="divider"></div>
+    <div class="filters">
+      <button class="f on" onclick="filt('all',this)">All</button>
+      <button class="f" onclick="filt('free',this)">Free</button>
+      <button class="f" onclick="filt('paid',this)">Paid</button>
+      <button class="f" onclick="filt('undetected',this)">Undetected</button>
+      <button class="f" onclick="filt('updated',this)">Updated</button>
     </div>
-    <div class="exec-filter">
-      <button class="filter-btn on" onclick="filterExec('all',this)">All</button>
-      <button class="filter-btn" onclick="filterExec('free',this)">Free</button>
-      <button class="filter-btn" onclick="filterExec('paid',this)">Paid</button>
-      <button class="filter-btn" onclick="filterExec('undetected',this)">Undetected</button>
-      <button class="filter-btn" onclick="filterExec('updated',this)">Updated</button>
-    </div>
-    <div class="exec-grid">
-      <div class="exec-row head">
-        <div>#</div>
-        <div>Name</div>
-        <div>Price</div>
-        <div>Detection</div>
-        <div>Status</div>
-        <div>UNC %</div>
-      </div>
-      <div id="exec-body"><div class="loading-msg">Fetching executors...</div></div>
-    </div>
+    <table class="etable">
+      <thead>
+        <tr>
+          <th style="width:28px">#</th>
+          <th>Name</th>
+          <th style="width:70px">Price</th>
+          <th style="width:80px">Detection</th>
+          <th style="width:80px">Status</th>
+          <th style="width:70px">UNC</th>
+        </tr>
+      </thead>
+      <tbody id="exec-body"><tr><td colspan="6"><div class="msg">Fetching...</div></td></tr></tbody>
+    </table>
   </div>
 
   <div id="roblox" class="page">
-    <div class="section-head">
-      <h2>Roblox Versions</h2>
-      <p>Live</p>
-    </div>
-    <div id="rbx-body"><div class="loading-msg">Fetching versions...</div></div>
+    <div class="sec"><h2>Roblox Versions</h2><span class="sec-tag">Live</span></div>
+    <div class="divider"></div>
+    <div id="rbx-body"><div class="msg">Fetching...</div></div>
   </div>
 
 </div>
 
-<div class="toast" id="toast">✓ Copied</div>
+<div class="toast" id="toast">Copied</div>
 
 <script>
-function go(id, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
-  document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
-  const page = document.getElementById(id);
-  page.classList.add('on');
-  page.style.animation = 'none';
-  page.offsetHeight;
-  page.style.animation = '';
-  if (btn) btn.classList.add('on');
-  if (id === 'executors' && !execLoaded) loadExecs();
-  if (id === 'roblox' && !rbxLoaded) loadRbx();
+function go(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  if(btn)btn.classList.add('on');
+  if(id==='executors'&&!execLoaded)loadExecs();
+  if(id==='roblox'&&!rbxLoaded)loadRbx();
 }
 
-function cp(btn, text) {
-  const clean = text.replace(/&quot;/g, '"');
-  navigator.clipboard ? navigator.clipboard.writeText(clean).catch(() => fb(clean)) : fb(clean);
-  btn.textContent = '✓ Copied!';
-  btn.classList.add('did-copy');
-  const t = document.getElementById('toast');
-  t.classList.add('show');
-  setTimeout(() => {
-    t.classList.remove('show');
-    btn.textContent = 'Copy';
-    btn.classList.remove('did-copy');
-  }, 1800);
+function cp(btn,text){
+  const s=text.replace(/&quot;/g,'"');
+  navigator.clipboard?navigator.clipboard.writeText(s).catch(()=>fb(s)):fb(s);
+  btn.textContent='Copied';btn.classList.add('ok');
+  const t=document.getElementById('toast');t.classList.add('show');
+  setTimeout(()=>{t.classList.remove('show');btn.textContent='Copy';btn.classList.remove('ok');},1800);
 }
 
-function fb(text) {
-  const ta = document.createElement('textarea');
-  ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
-  document.body.appendChild(ta); ta.select();
-  document.execCommand('copy'); document.body.removeChild(ta);
+function fb(s){
+  const ta=document.createElement('textarea');
+  ta.value=s;ta.style.cssText='position:fixed;opacity:0';
+  document.body.appendChild(ta);ta.select();
+  document.execCommand('copy');document.body.removeChild(ta);
 }
 
-let execData = [], execLoaded = false, currentFilter = 'all';
+let execData=[],execLoaded=false,curFilt='all';
 
-async function loadExecs() {
-  execLoaded = true;
-  try {
-    const res = await fetch('https://weao.xyz/api/status/exploits', {
-      headers: { 'User-Agent': 'WEAO-3PService' }
-    });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    execData = await res.json();
+async function loadExecs(){
+  execLoaded=true;
+  try{
+    const r=await fetch('https://weao.xyz/api/status/exploits',{headers:{'User-Agent':'WEAO-3PService'}});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    execData=await r.json();
     renderExecs();
-  } catch(e) {
-    document.getElementById('exec-body').innerHTML =
-      '<div class="err-msg">Failed to load — ' + e.message + '</div>';
+  }catch(e){
+    document.getElementById('exec-body').innerHTML=`<tr><td colspan="6"><div class="msg merr">Failed — ${e.message}</div></td></tr>`;
   }
 }
 
-function renderExecs() {
-  let data = [...execData];
-  if (currentFilter === 'free') data = data.filter(e => e.free);
-  if (currentFilter === 'paid') data = data.filter(e => !e.free);
-  if (currentFilter === 'undetected') data = data.filter(e => !e.detected);
-  if (currentFilter === 'updated') data = data.filter(e => e.updateStatus);
-  if (!data.length) {
-    document.getElementById('exec-body').innerHTML = '<div class="loading-msg">No results.</div>';
-    return;
-  }
-  document.getElementById('exec-body').innerHTML = data.map((e, i) => `
-    <div class="exec-row" style="animation-delay:${i * 0.04}s">
-      <div class="exec-idx">${i + 1}</div>
-      <div>
-        <div class="exec-name">${e.title}</div>
-        <div class="exec-sub">${e.platform || ''} · ${e.version || ''}</div>
-      </div>
-      <div>${e.free
-        ? '<span class="badge bg-free">Free</span>'
-        : `<span class="badge bg-paid">${e.cost || 'Paid'}</span>`}
-      </div>
-      <div>${e.detected
-        ? '<span class="badge bg-det">Detected</span>'
-        : '<span class="badge bg-safe">Safe</span>'}
-      </div>
-      <div>${e.updateStatus
-        ? '<span class="badge bg-upd">Updated</span>'
-        : '<span class="badge bg-old">Outdated</span>'}
-      </div>
-      <div class="exec-perc">${e.uncPercentage !== undefined ? '<b>' + e.uncPercentage + '</b>% UNC' : '—'}</div>
-    </div>
-  `).join('');
+function renderExecs(){
+  let d=[...execData];
+  if(curFilt==='free')d=d.filter(e=>e.free);
+  if(curFilt==='paid')d=d.filter(e=>!e.free);
+  if(curFilt==='undetected')d=d.filter(e=>!e.detected);
+  if(curFilt==='updated')d=d.filter(e=>e.updateStatus);
+  if(!d.length){document.getElementById('exec-body').innerHTML='<tr><td colspan="6"><div class="msg">No results.</div></td></tr>';return;}
+  document.getElementById('exec-body').innerHTML=d.map((e,i)=>`
+    <tr style="animation-delay:${i*0.025}s">
+      <td style="font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1)">${i+1}</td>
+      <td><div class="en">${e.title}</div><div class="esub">${[e.platform,e.version].filter(Boolean).join(' · ')}</div></td>
+      <td>${e.free?'<span class="chip cf">Free</span>':`<span class="chip cp">${e.cost||'Paid'}</span>`}</td>
+      <td>${e.detected?'<span class="chip cd">Detected</span>':'<span class="chip cs">Safe</span>'}</td>
+      <td>${e.updateStatus?'<span class="chip cu">Updated</span>':'<span class="chip co">Outdated</span>'}</td>
+      <td class="unc">${e.uncPercentage!=null?`<b>${e.uncPercentage}</b>%`:'—'}</td>
+    </tr>`).join('');
 }
 
-function filterExec(f, btn) {
-  currentFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
+function filt(f,btn){
+  curFilt=f;
+  document.querySelectorAll('.f').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
-  if (execLoaded && execData.length) renderExecs();
+  if(execLoaded&&execData.length)renderExecs();
 }
 
-let rbxLoaded = false;
+let rbxLoaded=false;
 
-async function loadRbx() {
-  rbxLoaded = true;
-  try {
-    const [cur, fut, past] = await Promise.all([
-      fetch('https://weao.xyz/api/versions/current', { headers: { 'User-Agent': 'WEAO-3PService' } }).then(r => r.json()),
-      fetch('https://weao.xyz/api/versions/future',  { headers: { 'User-Agent': 'WEAO-3PService' } }).then(r => r.json()),
-      fetch('https://weao.xyz/api/versions/past',    { headers: { 'User-Agent': 'WEAO-3PService' } }).then(r => r.json()),
+async function loadRbx(){
+  rbxLoaded=true;
+  try{
+    const [cur,fut,past]=await Promise.all([
+      fetch('https://weao.xyz/api/versions/current',{headers:{'User-Agent':'WEAO-3PService'}}).then(r=>r.json()),
+      fetch('https://weao.xyz/api/versions/future',{headers:{'User-Agent':'WEAO-3PService'}}).then(r=>r.json()),
+      fetch('https://weao.xyz/api/versions/past',{headers:{'User-Agent':'WEAO-3PService'}}).then(r=>r.json()),
     ]);
-    document.getElementById('rbx-body').innerHTML = `
-      <div class="rbx-grid">
-        ${rbxCard('Current', [['Windows', cur.Windows, cur.WindowsDate],['Mac', cur.Mac, cur.MacDate],['Android', cur.Android, cur.AndroidDate],['iOS', cur.iOS, cur.iOSDate]])}
-        ${rbxCard('Future',  [['Windows', fut.Windows, fut.WindowsDate],['Mac', fut.Mac, fut.MacDate]])}
-        ${rbxCard('Past',    [['Windows', past.Windows, past.WindowsDate],['Mac', past.Mac, past.MacDate]])}
-      </div>`;
-  } catch(e) {
-    document.getElementById('rbx-body').innerHTML =
-      '<div class="err-msg">Failed to load — ' + e.message + '</div>';
+    document.getElementById('rbx-body').innerHTML=`<div class="vgrid">
+      ${vc('Current',[['Windows',cur.Windows,cur.WindowsDate],['Mac',cur.Mac,cur.MacDate],['Android',cur.Android,cur.AndroidDate],['iOS',cur.iOS,cur.iOSDate]])}
+      ${vc('Future',[['Windows',fut.Windows,fut.WindowsDate],['Mac',fut.Mac,fut.MacDate]])}
+      ${vc('Past',[['Windows',past.Windows,past.WindowsDate],['Mac',past.Mac,past.MacDate]])}
+    </div>`;
+  }catch(e){
+    document.getElementById('rbx-body').innerHTML=`<div class="msg merr">Failed — ${e.message}</div>`;
   }
 }
 
-function rbxCard(title, rows) {
-  return `<div class="rbx-card">
-    <div class="rbx-card-title">${title}</div>
-    ${rows.map(([p, v, d]) => `
-      <div class="rbx-row">
-        <div><div class="rbx-platform">${p}</div><div class="rbx-date">${d || '—'}</div></div>
-        <div class="rbx-ver">${v || '—'}</div>
-      </div>`).join('')}
-  </div>`;
+function vc(t,rows){
+  return`<div class="vcard"><div class="vcard-h">${t}</div>${rows.map(([p,v,d])=>`
+    <div class="vrow">
+      <div><div class="vplat">${p}</div><div class="vdate">${d||'—'}</div></div>
+      <div class="vver">${v||'—'}</div>
+    </div>`).join('')}</div>`;
 }
 </script>
 </body>
