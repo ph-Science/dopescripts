@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dope | RBX</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0a;
+  --bg2:#111;
+  --bg3:#161616;
+  --border:#1e1e1e;
+  --border2:#2a2a2a;
+  --text:#f5f5f5;
+  --muted:#555;
+  --muted2:#888;
+  --green:#4ade80;
+  --red:#f87171;
+  --blue:#60a5fa;
+  --yellow:#fbbf24;
+}
+html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'Bricolage Grotesque',sans-serif;}
+button{font-family:'Bricolage Grotesque',sans-serif;cursor:pointer;}
+code{font-family:'JetBrains Mono',monospace;}
+
+.tabs-bar{
+  display:flex;justify-content:center;
+  padding:28px 0 0;
+  gap:4px;
+}
+.tab{
+  background:transparent;border:none;
+  color:var(--muted2);font-size:14px;font-weight:500;
+  padding:8px 20px;border-radius:8px;
+  transition:background 0.15s,color 0.15s;
+}
+.tab:hover{background:var(--bg3);color:var(--text);}
+.tab.on{background:var(--bg3);color:var(--text);}
+
+.tabs-divider{
+  height:1px;background:var(--border);
+  margin:16px 0 0;
+}
+
+.wrap{max-width:860px;margin:0 auto;padding:0 40px 80px;}
+
+.page{display:none;}
+.page.on{display:block;}
+
+.home-hero{padding:80px 0 56px;border-bottom:1px solid var(--border);}
+.home-hero h1{
+  font-size:64px;font-weight:800;letter-spacing:-3px;
+  line-height:1;margin-bottom:16px;
+}
+.home-hero p{font-size:15px;color:var(--muted2);line-height:1.6;max-width:400px;}
+.hero-btns{display:flex;gap:10px;margin-top:32px;}
+.btn{
+  padding:10px 22px;border-radius:7px;
+  font-size:13px;font-weight:600;
+  border:1px solid var(--border2);
+  transition:all 0.15s;
+}
+.btn-white{background:var(--text);color:#0a0a0a;border-color:transparent;}
+.btn-white:hover{background:#e5e5e5;}
+.btn-outline{background:transparent;color:var(--muted2);}
+.btn-outline:hover{color:var(--text);border-color:var(--border2);}
+
+.home-stat{
+  padding:32px 0;
+  border-bottom:1px solid var(--border);
+}
+.hstat-n{font-size:40px;font-weight:800;letter-spacing:-1.5px;margin-bottom:4px;}
+.hstat-l{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+
+.section-head{padding:40px 0 24px;border-bottom:1px solid var(--border);}
+.section-head h2{font-size:30px;font-weight:800;letter-spacing:-1px;}
+.section-head p{font-size:12px;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;}
+
+.script-item{
+  display:flex;align-items:center;gap:20px;
+  padding:22px 0;border-bottom:1px solid var(--border);
+}
+.script-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;color:var(--muted);min-width:16px;
+}
+.script-info{flex:1;}
+.script-name{font-size:17px;font-weight:700;margin-bottom:5px;}
+.script-meta{
+  display:flex;align-items:center;gap:14px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);
+}
+.tag-online{color:var(--green);display:flex;align-items:center;gap:5px;}
+.tag-online::before{
+  content:'';width:5px;height:5px;background:var(--green);
+  border-radius:50%;display:block;
+  box-shadow:0 0 5px var(--green);
+  animation:blink 2s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.script-btns{display:flex;gap:8px;flex-shrink:0;}
+.sbtn{
+  padding:8px 16px;border-radius:6px;
+  font-size:12px;font-weight:600;
+  border:1px solid var(--border2);
+  transition:all 0.15s;
+}
+.sbtn-copy{background:var(--text);color:#0a0a0a;border-color:transparent;}
+.sbtn-copy:hover{background:#e5e5e5;}
+.sbtn-game{background:transparent;color:var(--muted2);}
+.sbtn-game:hover{color:var(--text);border-color:var(--border2);}
+
+.exec-filter{
+  display:flex;gap:8px;padding:20px 0;
+  border-bottom:1px solid var(--border);flex-wrap:wrap;
+}
+.filter-btn{
+  padding:5px 13px;border-radius:20px;
+  font-size:12px;font-family:'JetBrains Mono',monospace;
+  border:1px solid var(--border2);background:transparent;
+  color:var(--muted2);transition:all 0.15s;
+}
+.filter-btn:hover,.filter-btn.on{background:var(--bg3);color:var(--text);border-color:var(--border2);}
+
+.exec-grid{display:flex;flex-direction:column;}
+.exec-row{
+  display:grid;
+  grid-template-columns:24px 1fr 90px 90px 90px 100px;
+  align-items:center;gap:16px;
+  padding:15px 0;border-bottom:1px solid var(--border);
+  font-size:13px;
+}
+.exec-row.head{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);border-bottom:1px solid var(--border2);
+}
+.exec-idx{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
+.exec-name{font-weight:700;}
+.exec-sub{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:2px;}
+.exec-version{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted2);}
+.badge{
+  display:inline-flex;align-items:center;
+  padding:3px 8px;border-radius:4px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;
+}
+.bg-free{background:rgba(74,222,128,0.1);color:var(--green);}
+.bg-paid{background:rgba(251,191,36,0.08);color:var(--yellow);}
+.bg-det{background:rgba(248,113,113,0.1);color:var(--red);}
+.bg-safe{background:rgba(74,222,128,0.1);color:var(--green);}
+.bg-upd{background:rgba(96,165,250,0.1);color:var(--blue);}
+.bg-old{background:rgba(248,113,113,0.1);color:var(--red);}
+.exec-perc{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted2);}
+.exec-perc b{color:var(--text);}
+.loading-msg,.err-msg{
+  padding:48px 0;text-align:center;
+  font-family:'JetBrains Mono',monospace;font-size:12px;
+}
+.loading-msg{color:var(--muted);}
+.err-msg{color:var(--red);}
+
+.rbx-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:14px;margin-top:28px;
+}
+.rbx-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:8px;padding:20px;
+}
+.rbx-card-title{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+  margin-bottom:14px;
+}
+.rbx-row{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:9px 0;border-bottom:1px solid var(--border);
+}
+.rbx-row:last-child{border-bottom:none;}
+.rbx-platform{font-size:13px;font-weight:600;}
+.rbx-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px;}
+.rbx-ver{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted2);text-align:right;word-break:break-all;max-width:200px;}
+
+.toast{
+  position:fixed;bottom:28px;right:28px;
+  background:var(--text);color:#0a0a0a;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;
+  padding:11px 20px;border-radius:7px;
+  z-index:1000;pointer-events:none;
+  opacity:0;transform:translateY(10px);
+  transition:all 0.18s;
+}
+.toast.show{opacity:1;transform:translateY(0);}
+
+@media(max-width:640px){
+  .wrap{padding:0 20px 60px;}
+  .home-hero h1{font-size:44px;}
+  .rbx-grid{grid-template-columns:1fr;}
+  .exec-row{grid-template-columns:16px 1fr 80px 80px;}
+  .exec-row > *:nth-child(5),.exec-row > *:nth-child(6){display:none;}
+  .tab{padding:8px 14px;font-size:13px;}
+}
+</style>
+</head>
+<body>
+
+<div class="tabs-bar">
+  <button class="tab on" onclick="go('home',this)">Home</button>
+  <button class="tab" onclick="go('scripts',this)">Scripts</button>
+  <button class="tab" onclick="go('executors',this)">Executors</button>
+  <button class="tab" onclick="go('roblox',this)">Roblox</button>
+</div>
+<div class="tabs-divider"></div>
+
+<div class="wrap">
+
+  <div id="home" class="page on">
+    <div class="home-hero">
+      <h1>dope</h1>
+      <p>These are the dopest scripts ever!1!</p>
+      <div class="hero-btns">
+        <button class="btn btn-white" onclick="go('scripts',document.querySelectorAll('.tab')[1])">View Scripts</button>
+        <button class="btn btn-outline" onclick="go('executors',document.querySelectorAll('.tab')[2])">Executors</button>
+      </div>
+    </div>
+    <div class="home-stat">
+      <div class="hstat-n">2</div>
+      <div class="hstat-l">Scripts Active</div>
+    </div>
+  </div>
+
+  <div id="scripts" class="page">
+    <div class="section-head">
+      <h2>Scripts</h2>
+      <p>dope scripts 😎</p>
+    </div>
+    <div class="script-item">
+      <div class="script-num">1</div>
+      <div class="script-info">
+        <div class="script-name">Murder Drones RP</div>
+        <div class="script-meta">
+          <span class="tag-online">online</span>
+        </div>
+      </div>
+      <div class="script-btns">
+        <button class="sbtn sbtn-copy" onclick="cp('loadstring(game:HttpGet(\'https://dopehub.vercel.app/murderdronesrp.lua\'))()')">Copy</button>
+        <button class="sbtn sbtn-game" onclick="window.open('https://www.roblox.com/games/11451679682','_blank')">↗ Game</button>
+      </div>
+    </div>
+    <div class="script-item">
+      <div class="script-num">2</div>
+      <div class="script-info">
+        <div class="script-name">Eat Jelly For Brainrots</div>
+        <div class="script-meta">
+          <span class="tag-online">online</span>
+        </div>
+      </div>
+      <div class="script-btns">
+        <button class="sbtn sbtn-copy" onclick="cp('loadstring(game:HttpGet(\'https://dopehub.vercel.app/eatjellyforbrainrots.lua\'))()')">Copy</button>
+        <button class="sbtn sbtn-game" onclick="window.open('https://www.roblox.com/games/96169782836983','_blank')">↗ Game</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="executors" class="page">
+    <div class="section-head">
+      <h2>Executors</h2>
+      <p>Live</p>
+    </div>
+    <div class="exec-filter">
+      <button class="filter-btn on" onclick="filterExec('all',this)">All</button>
+      <button class="filter-btn" onclick="filterExec('free',this)">Free</button>
+      <button class="filter-btn" onclick="filterExec('paid',this)">Paid</button>
+      <button class="filter-btn" onclick="filterExec('undetected',this)">Undetected</button>
+      <button class="filter-btn" onclick="filterExec('updated',this)">Updated</button>
+    </div>
+    <div class="exec-grid">
+      <div class="exec-row head">
+        <div>#</div>
+        <div>Name</div>
+        <div>Price</div>
+        <div>Detection</div>
+        <div>Status</div>
+        <div>UNC %</div>
+      </div>
+      <div id="exec-body"><div class="loading-msg">Fetching executors...</div></div>
+    </div>
+  </div>
+
+  <div id="roblox" class="page">
+    <div class="section-head">
+      <h2>Roblox Versions</h2>
+      <p>Live</p>
+    </div>
+    <div id="rbx-body"><div class="loading-msg">Fetching versions...</div></div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">✓ Copied</div>
+
+<script>
+function go(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  if (btn) btn.classList.add('on');
+  if (id === 'executors' && !execLoaded) loadExecs();
+  if (id === 'roblox' && !rbxLoaded) loadRbx();
+}
+
+function cp(text) {
+  const clean = text.replace(/\\'/g, "'");
+  navigator.clipboard ? navigator.clipboard.writeText(clean).catch(() => fb(clean)) : fb(clean);
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1600);
+}
+function fb(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+  document.body.appendChild(ta); ta.select();
+  document.execCommand('copy'); document.body.removeChild(ta);
+}
+
+let execData = [], execLoaded = false, currentFilter = 'all';
+
+async function loadExecs() {
+  execLoaded = true;
+  try {
+    const res = await fetch('https://weao.xyz/api/status/exploits', {
+      headers: { 'User-Agent': 'WEAO-3PService' }
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    execData = await res.json();
+    renderExecs();
+  } catch(e) {
+    document.getElementById('exec-body').innerHTML =
+      '<div class="err-msg">Failed to load — ' + e.message + '</div>';
+  }
+}
+
+function renderExecs() {
+  let data = [...execData];
+  if (currentFilter === 'free') data = data.filter(e => e.free);
+  if (currentFilter === 'paid') data = data.filter(e => !e.free);
+  if (currentFilter === 'undetected') data = data.filter(e => !e.detected);
+  if (currentFilter === 'updated') data = data.filter(e => e.updateStatus);
+  if (!data.length) {
+    document.getElementById('exec-body').innerHTML = '<div class="loading-msg">No results.</div>';
+    return;
+  }
+  document.getElementById('exec-body').innerHTML = data.map((e, i) => `
+    <div class="exec-row">
+      <div class="exec-idx">${i + 1}</div>
+      <div>
+        <div class="exec-name">${e.title}</div>
+        <div class="exec-sub">${e.platform || ''} · ${e.version || ''}</div>
+      </div>
+      <div>${e.free
+        ? '<span class="badge bg-free">Free</span>'
+        : `<span class="badge bg-paid">${e.cost || 'Paid'}</span>`}
+      </div>
+      <div>${e.detected
+        ? '<span class="badge bg-det">Detected</span>'
+        : '<span class="badge bg-safe">Safe</span>'}
+      </div>
+      <div>${e.updateStatus
+        ? '<span class="badge bg-upd">Updated</span>'
+        : '<span class="badge bg-old">Outdated</span>'}
+      </div>
+      <div class="exec-perc">${e.uncPercentage !== undefined ? '<b>' + e.uncPercentage + '</b>% UNC' : '—'}</div>
+    </div>
+  `).join('');
+}
+
+function filterExec(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  if (execLoaded && execData.length) renderExecs();
+}
+
+// ROBLOX
+let rbxLoaded = false;
+
+async function loadRbx() {
+  rbxLoaded = true;
+  try {
+    const [cur, fut, past] = await Promise.all([
+      fetch('https://weao.xyz/api/versions/current', { headers: { 'User-Agent': 'WEAO-3PService' } }).then(r => r.json()),
+      fetch('https://weao.xyz/api/versions/future',  { headers: { 'User-Agent': 'WEAO-3PService' } }).then(r => r.json()),
+      fetch('https://weao.xyz/api/versions/past',    { headers: { 'User-Agent': 'WEAO-3PService' } }).then(r => r.json()),
+    ]);
+    document.getElementById('rbx-body').innerHTML = `
+      <div class="rbx-grid">
+        ${rbxCard('Current', [['Windows', cur.Windows, cur.WindowsDate],['Mac', cur.Mac, cur.MacDate],['Android', cur.Android, cur.AndroidDate],['iOS', cur.iOS, cur.iOSDate]])}
+        ${rbxCard('Future',  [['Windows', fut.Windows, fut.WindowsDate],['Mac', fut.Mac, fut.MacDate]])}
+        ${rbxCard('Past',    [['Windows', past.Windows, past.WindowsDate],['Mac', past.Mac, past.MacDate]])}
+      </div>`;
+  } catch(e) {
+    document.getElementById('rbx-body').innerHTML =
+      '<div class="err-msg">Failed to load — ' + e.message + '</div>';
+  }
+}
+
+function rbxCard(title, rows) {
+  return `<div class="rbx-card">
+    <div class="rbx-card-title">${title}</div>
+    ${rows.map(([p, v, d]) => `
+      <div class="rbx-row">
+        <div><div class="rbx-platform">${p}</div><div class="rbx-date">${d || '—'}</div></div>
+        <div class="rbx-ver">${v || '—'}</div>
+      </div>`).join('')}
+  </div>`;
+}
+</script>
+</body>
+</html>
