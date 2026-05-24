@@ -32,13 +32,13 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
 @keyframes blink{0%,100%{opacity:1}48%,52%{opacity:0}}
 @keyframes rowIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
 @keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@keyframes cardIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 .topbar{
   position:sticky;top:0;z-index:100;
   display:flex;justify-content:center;
   padding:24px 0;
-  background:linear-gradient(var(--bg) 60%,transparent);
+  background:linear-gradient(var(--bg) 65%,transparent);
 }
 .tabs{
   display:flex;align-items:center;gap:1px;
@@ -46,7 +46,7 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
   border:1px solid var(--l2);
   border-radius:12px;
   padding:4px;
-  box-shadow:0 8px 32px rgba(0,0,0,0.4),0 1px 0 rgba(255,255,255,0.03) inset;
+  box-shadow:0 8px 32px rgba(0,0,0,0.5),0 1px 0 rgba(255,255,255,0.03) inset;
 }
 .tab{
   position:relative;
@@ -87,57 +87,45 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
 .page{display:none;}
 .page.on{display:block;animation:pageIn 0.25s cubic-bezier(0.22,1,0.36,1) both;}
 
-.hero{padding:52px 0 56px;}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.22em;
-  text-transform:uppercase;color:var(--d1);margin-bottom:28px;
-  animation:fadeUp 0.5s 0.05s cubic-bezier(0.22,1,0.36,1) both;
-}
-.hero-eyebrow-dot{width:4px;height:4px;border-radius:50%;background:var(--g);animation:blink 2s infinite;}
+.hero{padding:56px 0 60px;}
 .hero-h{
-  font-size:108px;font-weight:900;letter-spacing:-0.065em;line-height:0.88;
-  animation:fadeUp 0.5s 0.08s cubic-bezier(0.22,1,0.36,1) both;
+  font-size:112px;font-weight:900;letter-spacing:-0.065em;line-height:0.88;
+  animation:fadeUp 0.5s 0.06s cubic-bezier(0.22,1,0.36,1) both;
   color:var(--fg);
-}
-.hero-sub{
-  font-size:13px;color:var(--d2);margin-top:20px;letter-spacing:0.01em;line-height:1.6;
-  animation:fadeUp 0.5s 0.12s cubic-bezier(0.22,1,0.36,1) both;
-  max-width:340px;
 }
 .hero-icons{display:flex;gap:10px;align-items:center;}
 .hero-ico{
-  display:block;width:28px;height:28px;margin-top:20px;
-  image-rendering:pixelated;opacity:0.35;
-  animation:fadeUp 0.5s 0.14s cubic-bezier(0.22,1,0.36,1) both;
+  display:block;width:28px;height:28px;margin-top:22px;
+  image-rendering:pixelated;opacity:0.32;
+  animation:fadeUp 0.5s 0.12s cubic-bezier(0.22,1,0.36,1) both;
   transition:opacity 0.2s;
 }
-.hero-ico:hover{opacity:0.7;}
+.hero-ico:hover{opacity:0.65;}
 .hero-btns{
-  display:flex;gap:8px;margin-top:28px;
-  animation:fadeUp 0.5s 0.18s cubic-bezier(0.22,1,0.36,1) both;
+  display:flex;gap:8px;margin-top:30px;
+  animation:fadeUp 0.5s 0.16s cubic-bezier(0.22,1,0.36,1) both;
 }
 .btn{padding:10px 22px;border-radius:8px;font-size:12px;font-weight:600;letter-spacing:0.01em;transition:all 0.15s;}
 .btn:active{transform:scale(0.97);}
 .btn-solid{background:var(--fg);color:var(--bg);}
-.btn-solid:hover{opacity:0.9;}
+.btn-solid:hover{opacity:0.88;}
 .btn-outline{background:transparent;color:var(--d2);border:1px solid var(--l3);}
 .btn-outline:hover{color:var(--fg);border-color:var(--d1);}
 
 .divider{height:1px;background:var(--l1);}
 
-.sec{display:flex;align-items:baseline;justify-content:space-between;padding:44px 0 22px;}
+.sec{display:flex;align-items:baseline;justify-content:space-between;padding:44px 0 20px;}
 .sec h2{font-size:22px;font-weight:700;letter-spacing:-0.03em;}
 .sec-tag{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--d1);}
 
 .script-card{
   position:relative;
   display:flex;align-items:center;gap:16px;
-  padding:20px;margin-bottom:8px;
+  padding:18px 20px;margin-bottom:6px;
   border-radius:10px;
   border:1px solid var(--l1);
   background:var(--s1);
-  transition:border-color 0.2s,transform 0.2s,background 0.2s;
+  transition:border-color 0.18s,transform 0.18s,background 0.18s;
   animation:cardIn 0.35s cubic-bezier(0.22,1,0.36,1) both;
   overflow:hidden;
 }
@@ -145,7 +133,7 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
 .script-card:nth-child(2){animation-delay:0.09s;}
 .script-card::before{
   content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
-  background:var(--g);opacity:0;transition:opacity 0.2s;
+  background:var(--g);opacity:0;transition:opacity 0.18s;
 }
 .script-card:hover{border-color:var(--l3);background:var(--s2);transform:translateX(2px);}
 .script-card:hover::before{opacity:1;}
@@ -184,8 +172,9 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
   padding:12px 0;border-bottom:1px solid var(--l2);
   text-align:left;font-weight:400;
 }
-.etable td{padding:13px 0;border-bottom:1px solid var(--l1);font-size:13px;vertical-align:middle;}
+.etable td{padding:12px 0;border-bottom:1px solid var(--l1);font-size:13px;vertical-align:middle;}
 .etable tbody tr{opacity:0;animation:rowIn 0.2s ease forwards;}
+.etable tbody tr:hover td{background:transparent;}
 .en{font-weight:600;letter-spacing:-0.01em;margin-bottom:2px;}
 .esub{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1);}
 .chip{display:inline-flex;align-items:center;padding:2px 7px;border-radius:3px;font-family:'Geist Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.05em;}
@@ -198,22 +187,28 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
 .unc{font-family:'Geist Mono',monospace;font-size:10px;color:var(--d2);}
 .unc b{color:var(--fg);}
 
+.plat-icon{width:14px;height:14px;object-fit:contain;opacity:0.6;vertical-align:middle;margin-right:5px;}
+
 .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px;}
 .vcard{
   background:var(--s1);border:1px solid var(--l1);
   border-radius:10px;padding:18px;
-  transition:border-color 0.2s,transform 0.2s;
+  transition:border-color 0.18s,transform 0.18s;
   animation:cardIn 0.3s cubic-bezier(0.22,1,0.36,1) both;
 }
 .vcard:nth-child(2){animation-delay:0.06s;}
 .vcard:nth-child(3){animation-delay:0.12s;}
 .vcard:hover{border-color:var(--l3);transform:translateY(-1px);}
-.vcard-h{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--d1);margin-bottom:14px;}
-.vrow{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--l1);}
+.vcard-h{
+  font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--d1);margin-bottom:14px;
+}
+.vrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--l1);}
 .vrow:last-child{border-bottom:none;}
+.vrow-left{display:flex;align-items:center;gap:0;}
 .vplat{font-size:13px;font-weight:600;}
 .vdate{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1);margin-top:2px;}
-.vver{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d2);text-align:right;max-width:170px;word-break:break-all;}
+.vver{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d2);text-align:right;max-width:160px;word-break:break-all;}
 
 .notif-section-label{
   font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.2em;
@@ -221,13 +216,18 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
 }
 .notif{
   display:flex;align-items:flex-start;gap:14px;
-  padding:16px 18px;margin-bottom:6px;
+  padding:15px 18px;margin-bottom:6px;
   background:var(--s1);border:1px solid var(--l1);border-radius:10px;
-  transition:border-color 0.2s,transform 0.2s;
+  transition:border-color 0.18s,transform 0.18s;
   animation:cardIn 0.3s cubic-bezier(0.22,1,0.36,1) both;
 }
 .notif:hover{border-color:var(--l3);transform:translateX(2px);}
-.notif-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:1px;}
+.notif-icon{
+  width:28px;height:28px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.notif-icon img{width:14px;height:14px;object-fit:contain;opacity:0.8;}
 .ni-update{background:rgba(64,128,208,0.1);}
 .ni-detected{background:rgba(192,48,32,0.1);}
 .ni-roblox{background:rgba(201,160,48,0.1);}
@@ -257,9 +257,9 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
 
 @media(max-width:580px){
   .wrap{padding:0 20px 80px;}
-  .hero-h{font-size:68px;}
+  .hero-h{font-size:72px;}
   .vgrid{grid-template-columns:1fr;}
-  .tab{padding:7px 13px;font-size:11px;}
+  .tab{padding:7px 12px;font-size:11px;}
 }
 </style>
 </head>
@@ -290,7 +290,6 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
   <div id="home" class="page on">
     <div class="hero">
       <h1 class="hero-h">dope</h1>
-      <p class="hero-sub"></p>
       <div class="hero-icons">
         <img src="kitty.jpg" class="hero-ico" alt="">
         <img src="catem.png" class="hero-ico" alt="">
@@ -371,6 +370,19 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
 <div class="toast" id="toast">Copied</div>
 
 <script>
+const PLAT_ICONS={
+  Windows:'win.png',
+  Mac:'mac.png',
+  Android:'android.png',
+  iOS:'ios.png',
+};
+
+function platIcon(name){
+  const src=PLAT_ICONS[name];
+  if(!src)return'';
+  return`<img src="${src}" class="plat-icon" alt="${name}">`;
+}
+
 function go(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
@@ -425,7 +437,10 @@ function renderExecs(){
   document.getElementById('exec-body').innerHTML=d.map((e,i)=>`
     <tr style="animation-delay:${i*0.02}s">
       <td style="font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1)">${i+1}</td>
-      <td><div class="en">${e.title}</div><div class="esub">${[e.platform,e.version].filter(Boolean).join(' · ')}</div></td>
+      <td>
+        <div class="en">${e.title}</div>
+        <div class="esub">${e.platform?`${platIcon(e.platform)}${e.platform}`:''}${e.version?` · ${e.version}`:''}</div>
+      </td>
       <td>${e.free?'<span class="chip cf">Free</span>':`<span class="chip cp">${e.cost||'Paid'}</span>`}</td>
       <td>${e.detected?'<span class="chip cd">Detected</span>':'<span class="chip cs">Safe</span>'}</td>
       <td>${e.updateStatus?'<span class="chip cu">Updated</span>':'<span class="chip co">Outdated</span>'}</td>
@@ -465,7 +480,9 @@ async function loadRbx(){
 function vc(t,rows){
   return`<div class="vcard"><div class="vcard-h">${t}</div>${rows.map(([p,v,d])=>`
     <div class="vrow">
-      <div><div class="vplat">${p}</div><div class="vdate">${d||'—'}</div></div>
+      <div class="vrow-left">
+        ${platIcon(p)}<div><div class="vplat">${p}</div><div class="vdate">${d||'—'}</div></div>
+      </div>
       <div class="vver">${v||'—'}</div>
     </div>`).join('')}</div>`;
 }
@@ -484,17 +501,17 @@ function buildNotifs(){
   const notifs=[];
   if(hasExec){
     execData.filter(e=>e.detected).forEach(e=>{
-      notifs.push({type:'detected',icon:'⚠️',iconClass:'ni-detected',tag:'Detected',tagClass:'nt-detected',title:e.title,sub:`Flagged · ${e.platform||'Unknown platform'}`,time:'Live',category:'executor'});
+      notifs.push({type:'detected',iconSrc:'win.png',iconClass:'ni-detected',tag:'Detected',tagClass:'nt-detected',title:e.title,sub:`Flagged · ${e.platform||'Unknown'}`,time:'Live',category:'executor',platform:e.platform});
     });
     execData.filter(e=>e.updateStatus).forEach(e=>{
-      notifs.push({type:'update',icon:'↑',iconClass:'ni-update',tag:'Updated',tagClass:'nt-update',title:e.title,sub:`${e.version||'Latest'} · ${e.platform||'Unknown platform'}`,time:'Live',category:'executor'});
+      notifs.push({type:'update',iconSrc:PLAT_ICONS[e.platform]||null,iconClass:'ni-update',tag:'Updated',tagClass:'nt-update',title:e.title,sub:`${e.version||'Latest'} · ${e.platform||'Unknown'}`,time:'Live',category:'executor',platform:e.platform});
     });
   }
   if(hasRbx){
     const{cur,fut}=rbxData;
-    if(cur.Windows)notifs.push({type:'roblox',icon:'🎮',iconClass:'ni-roblox',tag:'Roblox',tagClass:'nt-roblox',title:'Windows Client',sub:`${cur.Windows} · ${cur.WindowsDate||'—'}`,time:'Live',category:'roblox'});
-    if(cur.Mac)notifs.push({type:'roblox',icon:'🎮',iconClass:'ni-roblox',tag:'Roblox',tagClass:'nt-roblox',title:'Mac Client',sub:`${cur.Mac} · ${cur.MacDate||'—'}`,time:'Live',category:'roblox'});
-    if(fut.Windows)notifs.push({type:'update',icon:'⏳',iconClass:'ni-update',tag:'Incoming',tagClass:'nt-update',title:'Future Windows Build',sub:`${fut.Windows} · ${fut.WindowsDate||'—'}`,time:'Live',category:'roblox'});
+    if(cur.Windows)notifs.push({type:'roblox',iconSrc:'win.png',iconClass:'ni-roblox',tag:'Roblox',tagClass:'nt-roblox',title:'Windows Client',sub:`${cur.Windows} · ${cur.WindowsDate||'—'}`,time:'Live',category:'roblox'});
+    if(cur.Mac)notifs.push({type:'roblox',iconSrc:'mac.png',iconClass:'ni-roblox',tag:'Roblox',tagClass:'nt-roblox',title:'Mac Client',sub:`${cur.Mac} · ${cur.MacDate||'—'}`,time:'Live',category:'roblox'});
+    if(fut.Windows)notifs.push({type:'update',iconSrc:'win.png',iconClass:'ni-update',tag:'Incoming',tagClass:'nt-update',title:'Future Windows Build',sub:`${fut.Windows} · ${fut.WindowsDate||'—'}`,time:'Live',category:'roblox'});
   }
   if(!notifs.length){
     document.getElementById('notif-body').innerHTML='<div class="msg">Nothing here yet.</div>';
@@ -515,8 +532,9 @@ function buildNotifs(){
 }
 
 function notifRow(n,i){
+  const iconContent=n.iconSrc?`<img src="${n.iconSrc}" alt="" style="width:14px;height:14px;object-fit:contain;opacity:0.75;">`:'';
   return`<div class="notif" style="animation-delay:${i*0.035}s">
-    <div class="notif-icon ${n.iconClass}">${n.icon}</div>
+    <div class="notif-icon ${n.iconClass}">${iconContent}</div>
     <div class="notif-body">
       <div class="notif-title">${n.title}<span class="notif-tag ${n.tagClass}">${n.tag}</span></div>
       <div class="notif-sub">${n.sub}</div>
