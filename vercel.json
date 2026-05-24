@@ -1,0 +1,15 @@
+{
+  "headers": [
+    {
+      "source": "/(.*\\.lua)",
+      "headers": [
+        {
+          "key": "x-lua-protected",
+          "value": "true"
+        }
+      ]
+    }
+  ],
+  "rewrites": [],
+  "functions": {}
+}
