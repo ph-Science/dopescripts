@@ -9,265 +9,257 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
---bg:#080808;
---s1:#0d0d0d;
---s2:#141414;
---l1:#1a1a1a;
---l2:#242424;
---fg:#f0f0f0;
---d1:#555;
---d2:#888;
---g:#1dba6a;
+--bg:#060606;
+--s1:#0c0c0c;
+--s2:#111;
+--l1:#181818;
+--l2:#222;
+--l3:#2a2a2a;
+--fg:#efefef;
+--d1:#444;
+--d2:#777;
+--d3:#999;
+--g:#18c463;
 --y:#c9a030;
 --b:#4080d0;
 --r:#c03020;
 }
 html,body{min-height:100vh;background:var(--bg);color:var(--fg);font-family:'Geist',sans-serif;overflow-x:hidden;}
-button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none;}
+button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none;color:inherit;}
+::selection{background:var(--g);color:#000;}
 
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(18px)}
-  to{opacity:1;transform:none}
-}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes blink{0%,100%{opacity:1}45%,55%{opacity:0.1}}
-@keyframes rowIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
-@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@keyframes g1{0%,93%,100%{transform:none}94%{transform:translate(-2px,1px)}96%{transform:translate(2px,-1px)}98%{transform:none}}
-@keyframes g2{0%,93%,100%{clip-path:none}94%{clip-path:polygon(0 18%,100% 18%,100% 38%,0 38%);transform:translateX(3px)}96%{clip-path:polygon(0 62%,100% 62%,100% 82%,0 82%);transform:translateX(-3px)}98%{clip-path:none}}
-@keyframes tabSlide{
-  from{opacity:0;transform:translateY(-6px)}
-  to{opacity:1;transform:none}
-}
-@keyframes indicatorIn{
-  from{opacity:0;transform:scaleX(0)}
-  to{opacity:1;transform:scaleX(1)}
-}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes blink{0%,100%{opacity:1}48%,52%{opacity:0}}
+@keyframes rowIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes cardIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
 .topbar{
+  position:sticky;top:0;z-index:100;
   display:flex;justify-content:center;
-  padding:36px 0 0;
-  animation:tabSlide 0.5s cubic-bezier(0.22,1,0.36,1) both;
+  padding:24px 0;
+  background:linear-gradient(var(--bg) 60%,transparent);
 }
 .tabs{
-  display:flex;align-items:center;gap:2px;
+  display:flex;align-items:center;gap:1px;
   background:var(--s1);
-  border:1px solid var(--l1);
-  border-radius:10px;
+  border:1px solid var(--l2);
+  border-radius:12px;
   padding:4px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4),0 1px 0 rgba(255,255,255,0.03) inset;
 }
 .tab{
   position:relative;
-  color:var(--d2);font-size:12px;font-weight:500;
-  padding:8px 20px;border-radius:7px;
-  transition:color 0.2s;
-  letter-spacing:0.01em;
-  z-index:1;
+  color:var(--d2);font-size:11.5px;font-weight:500;
+  padding:8px 18px;border-radius:8px;
+  transition:color 0.15s;
+  letter-spacing:0.015em;
+  z-index:1;white-space:nowrap;
 }
-.tab:hover{color:var(--fg);}
+.tab:hover{color:var(--d3);}
 .tab.on{color:var(--fg);}
 .tab-bg{
-  position:absolute;inset:0;border-radius:7px;
+  position:absolute;inset:0;border-radius:8px;
   background:var(--l1);
-  opacity:0;
-  transition:opacity 0.2s;
+  border:1px solid var(--l3);
+  opacity:0;transition:opacity 0.15s;
   z-index:-1;
+  box-shadow:0 2px 8px rgba(0,0,0,0.3);
 }
 .tab.on .tab-bg{opacity:1;}
 .tab-dot{
-  display:inline-block;
-  width:4px;height:4px;border-radius:50%;
-  background:var(--g);
-  margin-left:6px;vertical-align:middle;
-  opacity:0;transition:opacity 0.2s;
-  animation:blink 2.5s infinite;
+  display:inline-block;width:4px;height:4px;border-radius:50%;
+  background:var(--g);margin-left:5px;vertical-align:middle;
+  opacity:0;transition:opacity 0.15s;animation:blink 2s infinite;
 }
 .tab.on .tab-dot{opacity:1;}
+.tab-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:14px;height:14px;border-radius:100px;
+  background:var(--r);color:#fff;
+  font-family:'Geist Mono',monospace;font-size:8px;font-weight:700;
+  margin-left:5px;vertical-align:middle;padding:0 3px;
+  opacity:0;transition:opacity 0.2s;
+}
+.tab-badge.show{opacity:1;}
 
-.wrap{max-width:800px;margin:0 auto;padding:0 44px 120px;}
+.wrap{max-width:780px;margin:0 auto;padding:0 40px 120px;}
 .page{display:none;}
-.page.on{display:block;animation:pageIn 0.3s cubic-bezier(0.22,1,0.36,1) both;}
+.page.on{display:block;animation:pageIn 0.25s cubic-bezier(0.22,1,0.36,1) both;}
 
-.hero{padding:72px 0 52px;}
-.hero-pre{
-  font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.2em;
-  text-transform:uppercase;color:var(--d1);margin-bottom:24px;
+.hero{padding:52px 0 56px;}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--d1);margin-bottom:28px;
   animation:fadeUp 0.5s 0.05s cubic-bezier(0.22,1,0.36,1) both;
 }
+.hero-eyebrow-dot{width:4px;height:4px;border-radius:50%;background:var(--g);animation:blink 2s infinite;}
 .hero-h{
-  font-size:96px;font-weight:800;letter-spacing:-0.06em;line-height:0.9;
-  animation:fadeUp 0.5s 0.1s cubic-bezier(0.22,1,0.36,1) both;
-  position:relative;display:inline-block;color:var(--fg);
+  font-size:108px;font-weight:900;letter-spacing:-0.065em;line-height:0.88;
+  animation:fadeUp 0.5s 0.08s cubic-bezier(0.22,1,0.36,1) both;
+  color:var(--fg);
 }
-.hero-h::before{
-  content:attr(data-text);position:absolute;inset:0;color:var(--fg);
-  animation:g1 10s infinite,g2 10s infinite;
+.hero-sub{
+  font-size:13px;color:var(--d2);margin-top:20px;letter-spacing:0.01em;line-height:1.6;
+  animation:fadeUp 0.5s 0.12s cubic-bezier(0.22,1,0.36,1) both;
+  max-width:340px;
 }
-.hero-icons {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
+.hero-icons{display:flex;gap:10px;align-items:center;}
 .hero-ico{
-  display:block;width:32px;height:32px;margin-top:24px;
-  image-rendering:pixelated;opacity:0.5;
-  animation:fadeUp 0.5s 0.15s cubic-bezier(0.22,1,0.36,1) both;
+  display:block;width:28px;height:28px;margin-top:20px;
+  image-rendering:pixelated;opacity:0.35;
+  animation:fadeUp 0.5s 0.14s cubic-bezier(0.22,1,0.36,1) both;
+  transition:opacity 0.2s;
 }
+.hero-ico:hover{opacity:0.7;}
 .hero-btns{
   display:flex;gap:8px;margin-top:28px;
-  animation:fadeUp 0.5s 0.2s cubic-bezier(0.22,1,0.36,1) both;
+  animation:fadeUp 0.5s 0.18s cubic-bezier(0.22,1,0.36,1) both;
 }
-.btn{
-  padding:10px 20px;border-radius:7px;font-size:12px;font-weight:600;
-  letter-spacing:0.01em;transition:all 0.18s;
-}
+.btn{padding:10px 22px;border-radius:8px;font-size:12px;font-weight:600;letter-spacing:0.01em;transition:all 0.15s;}
 .btn:active{transform:scale(0.97);}
 .btn-solid{background:var(--fg);color:var(--bg);}
-.btn-solid:hover{opacity:0.88;}
-.btn-outline{background:transparent;color:var(--d2);border:1px solid var(--l2);}
+.btn-solid:hover{opacity:0.9;}
+.btn-outline{background:transparent;color:var(--d2);border:1px solid var(--l3);}
 .btn-outline:hover{color:var(--fg);border-color:var(--d1);}
-
-.stat{
-  padding:28px 0;border-top:1px solid var(--l1);
-  animation:fadeUp 0.5s 0.25s cubic-bezier(0.22,1,0.36,1) both;
-}
-.stat-n{
-  font-size:52px;font-weight:800;letter-spacing:-0.04em;line-height:1;
-  margin-bottom:6px;transition:letter-spacing 0.3s;
-}
-.stat:hover .stat-n{letter-spacing:-0.02em;}
-.stat-l{
-  font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.2em;
-  text-transform:uppercase;color:var(--d1);
-}
-
-.sec{display:flex;align-items:baseline;justify-content:space-between;padding:40px 0 20px;}
-.sec h2{font-size:24px;font-weight:700;letter-spacing:-0.03em;}
-.sec-tag{
-  font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.18em;
-  text-transform:uppercase;color:var(--d1);
-}
 
 .divider{height:1px;background:var(--l1);}
 
-.script{
-  display:flex;align-items:center;gap:14px;
-  padding:18px 0;border-bottom:1px solid var(--l1);
-  transition:padding-left 0.2s cubic-bezier(0.22,1,0.36,1);
-  animation:fadeUp 0.35s cubic-bezier(0.22,1,0.36,1) both;
+.sec{display:flex;align-items:baseline;justify-content:space-between;padding:44px 0 22px;}
+.sec h2{font-size:22px;font-weight:700;letter-spacing:-0.03em;}
+.sec-tag{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--d1);}
+
+.script-card{
+  position:relative;
+  display:flex;align-items:center;gap:16px;
+  padding:20px;margin-bottom:8px;
+  border-radius:10px;
+  border:1px solid var(--l1);
+  background:var(--s1);
+  transition:border-color 0.2s,transform 0.2s,background 0.2s;
+  animation:cardIn 0.35s cubic-bezier(0.22,1,0.36,1) both;
+  overflow:hidden;
 }
-.script:nth-child(1){animation-delay:0.05s;}
-.script:nth-child(2){animation-delay:0.1s;}
-.script:hover{padding-left:6px;}
-.script-n{
-  font-family:'Geist Mono',monospace;font-size:10px;color:var(--d1);min-width:22px;
+.script-card:nth-child(1){animation-delay:0.04s;}
+.script-card:nth-child(2){animation-delay:0.09s;}
+.script-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--g);opacity:0;transition:opacity 0.2s;
 }
-.script-info{flex:1;}
-.script-title{font-size:15px;font-weight:600;letter-spacing:-0.01em;margin-bottom:4px;}
+.script-card:hover{border-color:var(--l3);background:var(--s2);transform:translateX(2px);}
+.script-card:hover::before{opacity:1;}
+.script-num{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1);min-width:20px;flex-shrink:0;}
+.script-info{flex:1;min-width:0;}
+.script-title{font-size:14px;font-weight:600;letter-spacing:-0.01em;margin-bottom:5px;}
 .online{
   display:inline-flex;align-items:center;gap:5px;
-  font-family:'Geist Mono',monospace;font-size:9px;
+  font-family:'Geist Mono',monospace;font-size:8.5px;
   letter-spacing:0.15em;text-transform:uppercase;color:var(--g);
 }
-.dot{width:5px;height:5px;border-radius:50%;background:currentColor;animation:blink 2.5s infinite;}
-.sbtns{display:flex;gap:7px;flex-shrink:0;}
-.sbtn{
-  padding:7px 14px;border-radius:6px;font-size:10px;font-weight:600;
-  letter-spacing:0.02em;transition:all 0.18s;
-}
-.sbtn:active{transform:scale(0.96);}
-.sbtn-c{background:var(--fg);color:var(--bg);}
-.sbtn-c:hover{opacity:0.85;}
-.sbtn-c.ok{background:var(--g);color:#000;}
-.sbtn-g{background:transparent;color:var(--d2);border:1px solid var(--l2);}
+.dot{width:4px;height:4px;border-radius:50%;background:currentColor;animation:blink 2s infinite;}
+.sbtns{display:flex;gap:6px;flex-shrink:0;}
+.sbtn{padding:7px 14px;border-radius:6px;font-size:10px;font-weight:600;letter-spacing:0.015em;transition:all 0.15s;}
+.sbtn:active{transform:scale(0.95);}
+.sbtn-c{background:var(--l2);color:var(--d3);border:1px solid var(--l3);}
+.sbtn-c:hover{background:var(--l3);color:var(--fg);}
+.sbtn-c.ok{background:var(--g);color:#000;border-color:var(--g);}
+.sbtn-g{background:transparent;color:var(--d1);border:1px solid var(--l2);}
 .sbtn-g:hover{color:var(--fg);border-color:var(--d1);}
 
-.filters{
-  display:flex;gap:5px;padding:16px 0;
-  border-bottom:1px solid var(--l1);flex-wrap:wrap;
-}
+.filters{display:flex;gap:5px;padding:16px 0;border-bottom:1px solid var(--l1);flex-wrap:wrap;}
 .f{
-  padding:4px 12px;border-radius:100px;font-size:10px;
+  padding:5px 13px;border-radius:100px;font-size:10px;
   font-family:'Geist Mono',monospace;
   border:1px solid var(--l2);background:transparent;
-  color:var(--d2);transition:all 0.18s;
+  color:var(--d1);transition:all 0.15s;letter-spacing:0.04em;
 }
-.f:hover{color:var(--fg);border-color:var(--d1);}
+.f:hover{color:var(--d3);border-color:var(--l3);}
 .f.on{background:var(--fg);color:var(--bg);border-color:var(--fg);}
 
 .etable{width:100%;border-collapse:collapse;}
 .etable th{
   font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.18em;
   text-transform:uppercase;color:var(--d1);
-  padding:10px 0 10px;border-bottom:1px solid var(--l2);
+  padding:12px 0;border-bottom:1px solid var(--l2);
   text-align:left;font-weight:400;
 }
-.etable td{
-  padding:13px 0;border-bottom:1px solid var(--l1);
-  font-size:13px;vertical-align:middle;
-}
-.etable tbody tr{
-  opacity:0;animation:rowIn 0.2s ease forwards;
-  transition:background 0.15s;
-}
+.etable td{padding:13px 0;border-bottom:1px solid var(--l1);font-size:13px;vertical-align:middle;}
+.etable tbody tr{opacity:0;animation:rowIn 0.2s ease forwards;}
 .en{font-weight:600;letter-spacing:-0.01em;margin-bottom:2px;}
 .esub{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1);}
-.chip{
-  display:inline-flex;align-items:center;
-  padding:2px 7px;border-radius:3px;
-  font-family:'Geist Mono',monospace;font-size:9px;font-weight:600;
-}
-.cf{background:rgba(29,186,106,0.08);color:var(--g);}
-.cp{background:rgba(201,160,48,0.08);color:var(--y);}
-.cs{background:rgba(29,186,106,0.08);color:var(--g);}
-.cd{background:rgba(192,48,32,0.08);color:var(--r);}
-.cu{background:rgba(64,128,208,0.08);color:var(--b);}
-.co{background:rgba(192,48,32,0.08);color:var(--r);}
+.chip{display:inline-flex;align-items:center;padding:2px 7px;border-radius:3px;font-family:'Geist Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.05em;}
+.cf{background:rgba(24,196,99,0.07);color:var(--g);}
+.cp{background:rgba(201,160,48,0.07);color:var(--y);}
+.cs{background:rgba(24,196,99,0.07);color:var(--g);}
+.cd{background:rgba(192,48,32,0.07);color:var(--r);}
+.cu{background:rgba(64,128,208,0.07);color:var(--b);}
+.co{background:rgba(192,48,32,0.07);color:var(--r);}
 .unc{font-family:'Geist Mono',monospace;font-size:10px;color:var(--d2);}
 .unc b{color:var(--fg);}
 
-.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;}
+.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px;}
 .vcard{
   background:var(--s1);border:1px solid var(--l1);
-  border-radius:8px;padding:18px;
+  border-radius:10px;padding:18px;
   transition:border-color 0.2s,transform 0.2s;
-  animation:fadeUp 0.3s cubic-bezier(0.22,1,0.36,1) both;
+  animation:cardIn 0.3s cubic-bezier(0.22,1,0.36,1) both;
 }
-.vcard:nth-child(2){animation-delay:0.07s;}
-.vcard:nth-child(3){animation-delay:0.14s;}
-.vcard:hover{border-color:var(--l2);transform:translateY(-1px);}
-.vcard-h{
-  font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.2em;
-  text-transform:uppercase;color:var(--d1);margin-bottom:12px;
-}
-.vrow{
-  display:flex;justify-content:space-between;align-items:flex-start;
-  padding:8px 0;border-bottom:1px solid var(--l1);
-}
+.vcard:nth-child(2){animation-delay:0.06s;}
+.vcard:nth-child(3){animation-delay:0.12s;}
+.vcard:hover{border-color:var(--l3);transform:translateY(-1px);}
+.vcard-h{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--d1);margin-bottom:14px;}
+.vrow{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--l1);}
 .vrow:last-child{border-bottom:none;}
 .vplat{font-size:13px;font-weight:600;}
 .vdate{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1);margin-top:2px;}
 .vver{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d2);text-align:right;max-width:170px;word-break:break-all;}
 
-.msg{padding:48px 0;text-align:center;font-family:'Geist Mono',monospace;font-size:10px;color:var(--d1);}
+.notif-section-label{
+  font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--d1);padding:26px 0 10px;
+}
+.notif{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:16px 18px;margin-bottom:6px;
+  background:var(--s1);border:1px solid var(--l1);border-radius:10px;
+  transition:border-color 0.2s,transform 0.2s;
+  animation:cardIn 0.3s cubic-bezier(0.22,1,0.36,1) both;
+}
+.notif:hover{border-color:var(--l3);transform:translateX(2px);}
+.notif-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:1px;}
+.ni-update{background:rgba(64,128,208,0.1);}
+.ni-detected{background:rgba(192,48,32,0.1);}
+.ni-roblox{background:rgba(201,160,48,0.1);}
+.notif-body{flex:1;}
+.notif-title{font-size:13.5px;font-weight:600;letter-spacing:-0.01em;margin-bottom:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.notif-sub{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d2);letter-spacing:0.04em;}
+.notif-time{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1);flex-shrink:0;margin-top:3px;}
+.notif-tag{font-family:'Geist Mono',monospace;font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 6px;border-radius:3px;}
+.nt-update{background:rgba(64,128,208,0.1);color:var(--b);}
+.nt-detected{background:rgba(192,48,32,0.1);color:var(--r);}
+.nt-roblox{background:rgba(201,160,48,0.1);color:var(--y);}
+
+.msg{padding:52px 0;text-align:center;font-family:'Geist Mono',monospace;font-size:10px;color:var(--d1);}
 .merr{color:var(--r);}
 
 .toast{
-  position:fixed;bottom:22px;right:22px;
+  position:fixed;bottom:24px;left:50%;
+  transform:translateX(-50%) translateY(16px) scale(0.95);
   background:var(--fg);color:var(--bg);
   font-family:'Geist Mono',monospace;font-size:9px;font-weight:700;
   letter-spacing:0.2em;text-transform:uppercase;
-  padding:10px 18px;border-radius:6px;z-index:9999;pointer-events:none;
-  opacity:0;transform:translateY(10px) scale(0.95);
-  transition:all 0.22s cubic-bezier(0.34,1.4,0.64,1);
+  padding:10px 20px;border-radius:8px;z-index:9999;pointer-events:none;
+  opacity:0;transition:all 0.2s cubic-bezier(0.34,1.4,0.64,1);
+  white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,0.5);
 }
-.toast.show{opacity:1;transform:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0) scale(1);}
 
 @media(max-width:580px){
-  .wrap{padding:0 22px 80px;}
-  .hero-h{font-size:60px;}
+  .wrap{padding:0 20px 80px;}
+  .hero-h{font-size:68px;}
   .vgrid{grid-template-columns:1fr;}
-  .tab{padding:8px 14px;font-size:11px;}
+  .tab{padding:7px 13px;font-size:11px;}
 }
 </style>
 </head>
@@ -287,6 +279,9 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
     <button class="tab" onclick="go('roblox',this)">
       <span class="tab-bg"></span>Roblox
     </button>
+    <button class="tab" id="notif-tab" onclick="go('notifications',this)">
+      <span class="tab-bg"></span>Inbox<span class="tab-badge" id="notif-badge"></span>
+    </button>
   </div>
 </div>
 
@@ -294,28 +289,24 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
 
   <div id="home" class="page on">
     <div class="hero">
-      <h1 class="hero-h" data-text="dope">dope</h1>
-<div class="hero-icons">
-  <img src="kitty.jpg" class="hero-ico" alt="">
-  <img src="catem.png" class="hero-ico" alt="">
-</div>
-    <div class="hero-btns">
+      <h1 class="hero-h">dope</h1>
+      <p class="hero-sub">Roblox scripts, executor info, and live version tracking.</p>
+      <div class="hero-icons">
+        <img src="kitty.jpg" class="hero-ico" alt="">
+        <img src="catem.png" class="hero-ico" alt="">
+      </div>
+      <div class="hero-btns">
         <button class="btn btn-solid" onclick="go('scripts',document.querySelectorAll('.tab')[1])">View Scripts</button>
         <button class="btn btn-outline" onclick="go('executors',document.querySelectorAll('.tab')[2])">Executors</button>
       </div>
     </div>
-    <div class="divider"></div>
-    <div class="stat">
-      <div class="stat-n">2</div>
-      <div class="stat-l">Scripts Active</div>
-    </div>
   </div>
 
   <div id="scripts" class="page">
-    <div class="sec"><h2>Scripts</h2><span class="sec-tag">2 active</span></div>
-    <div class="divider"></div>
-    <div class="script">
-      <div class="script-n">01</div>
+    <div class="sec"><h2>Scripts</h2><span class="sec-tag">2 available</span></div>
+    <div class="divider" style="margin-bottom:16px;"></div>
+    <div class="script-card">
+      <div class="script-num">01</div>
       <div class="script-info">
         <div class="script-title">Murder Drones RP</div>
         <span class="online"><span class="dot"></span>online</span>
@@ -325,8 +316,8 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
         <button class="sbtn sbtn-g" onclick="window.open('https://www.roblox.com/games/11451679682','_blank')">Game ↗</button>
       </div>
     </div>
-    <div class="script">
-      <div class="script-n">02</div>
+    <div class="script-card">
+      <div class="script-num">02</div>
       <div class="script-info">
         <div class="script-title">Eat Jelly For Brainrots</div>
         <span class="online"><span class="dot"></span>online</span>
@@ -356,7 +347,7 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
           <th style="width:70px">Price</th>
           <th style="width:80px">Detection</th>
           <th style="width:80px">Status</th>
-          <th style="width:70px">UNC</th>
+          <th style="width:60px">UNC</th>
         </tr>
       </thead>
       <tbody id="exec-body"><tr><td colspan="6"><div class="msg">Fetching...</div></td></tr></tbody>
@@ -367,6 +358,12 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
     <div class="sec"><h2>Roblox Versions</h2><span class="sec-tag">Live</span></div>
     <div class="divider"></div>
     <div id="rbx-body"><div class="msg">Fetching...</div></div>
+  </div>
+
+  <div id="notifications" class="page">
+    <div class="sec"><h2>Inbox</h2><span class="sec-tag" id="notif-count">Loading...</span></div>
+    <div class="divider"></div>
+    <div id="notif-body"><div class="msg">Fetching...</div></div>
   </div>
 
 </div>
@@ -381,6 +378,11 @@ function go(id,btn){
   if(btn)btn.classList.add('on');
   if(id==='executors'&&!execLoaded)loadExecs();
   if(id==='roblox'&&!rbxLoaded)loadRbx();
+  if(id==='notifications'){
+    const badge=document.getElementById('notif-badge');
+    badge.textContent='';badge.classList.remove('show');
+    if(!notifLoaded)loadNotifs();
+  }
 }
 
 function cp(btn,text){
@@ -407,6 +409,7 @@ async function loadExecs(){
     if(!r.ok)throw new Error('HTTP '+r.status);
     execData=await r.json();
     renderExecs();
+    buildNotifs();
   }catch(e){
     document.getElementById('exec-body').innerHTML=`<tr><td colspan="6"><div class="msg merr">Failed — ${e.message}</div></td></tr>`;
   }
@@ -420,7 +423,7 @@ function renderExecs(){
   if(curFilt==='updated')d=d.filter(e=>e.updateStatus);
   if(!d.length){document.getElementById('exec-body').innerHTML='<tr><td colspan="6"><div class="msg">No results.</div></td></tr>';return;}
   document.getElementById('exec-body').innerHTML=d.map((e,i)=>`
-    <tr style="animation-delay:${i*0.025}s">
+    <tr style="animation-delay:${i*0.02}s">
       <td style="font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1)">${i+1}</td>
       <td><div class="en">${e.title}</div><div class="esub">${[e.platform,e.version].filter(Boolean).join(' · ')}</div></td>
       <td>${e.free?'<span class="chip cf">Free</span>':`<span class="chip cp">${e.cost||'Paid'}</span>`}</td>
@@ -437,7 +440,7 @@ function filt(f,btn){
   if(execLoaded&&execData.length)renderExecs();
 }
 
-let rbxLoaded=false;
+let rbxLoaded=false,rbxData=null;
 
 async function loadRbx(){
   rbxLoaded=true;
@@ -447,11 +450,13 @@ async function loadRbx(){
       fetch('https://weao.xyz/api/versions/future',{headers:{'User-Agent':'WEAO-3PService'}}).then(r=>r.json()),
       fetch('https://weao.xyz/api/versions/past',{headers:{'User-Agent':'WEAO-3PService'}}).then(r=>r.json()),
     ]);
+    rbxData={cur,fut,past};
     document.getElementById('rbx-body').innerHTML=`<div class="vgrid">
       ${vc('Current',[['Windows',cur.Windows,cur.WindowsDate],['Mac',cur.Mac,cur.MacDate],['Android',cur.Android,cur.AndroidDate],['iOS',cur.iOS,cur.iOSDate]])}
       ${vc('Future',[['Windows',fut.Windows,fut.WindowsDate],['Mac',fut.Mac,fut.MacDate]])}
       ${vc('Past',[['Windows',past.Windows,past.WindowsDate],['Mac',past.Mac,past.MacDate]])}
     </div>`;
+    buildNotifs();
   }catch(e){
     document.getElementById('rbx-body').innerHTML=`<div class="msg merr">Failed — ${e.message}</div>`;
   }
@@ -463,6 +468,70 @@ function vc(t,rows){
       <div><div class="vplat">${p}</div><div class="vdate">${d||'—'}</div></div>
       <div class="vver">${v||'—'}</div>
     </div>`).join('')}</div>`;
+}
+
+let notifLoaded=false;
+
+window.addEventListener('load',()=>{
+  if(!execLoaded)loadExecs();
+  if(!rbxLoaded)loadRbx();
+});
+
+function buildNotifs(){
+  const hasExec=execLoaded&&execData.length>0;
+  const hasRbx=rbxLoaded&&rbxData;
+  if(!hasExec&&!hasRbx)return;
+  const notifs=[];
+  if(hasExec){
+    execData.filter(e=>e.detected).forEach(e=>{
+      notifs.push({type:'detected',icon:'⚠️',iconClass:'ni-detected',tag:'Detected',tagClass:'nt-detected',title:e.title,sub:`Flagged · ${e.platform||'Unknown platform'}`,time:'Live',category:'executor'});
+    });
+    execData.filter(e=>e.updateStatus).forEach(e=>{
+      notifs.push({type:'update',icon:'↑',iconClass:'ni-update',tag:'Updated',tagClass:'nt-update',title:e.title,sub:`${e.version||'Latest'} · ${e.platform||'Unknown platform'}`,time:'Live',category:'executor'});
+    });
+  }
+  if(hasRbx){
+    const{cur,fut}=rbxData;
+    if(cur.Windows)notifs.push({type:'roblox',icon:'🎮',iconClass:'ni-roblox',tag:'Roblox',tagClass:'nt-roblox',title:'Windows Client',sub:`${cur.Windows} · ${cur.WindowsDate||'—'}`,time:'Live',category:'roblox'});
+    if(cur.Mac)notifs.push({type:'roblox',icon:'🎮',iconClass:'ni-roblox',tag:'Roblox',tagClass:'nt-roblox',title:'Mac Client',sub:`${cur.Mac} · ${cur.MacDate||'—'}`,time:'Live',category:'roblox'});
+    if(fut.Windows)notifs.push({type:'update',icon:'⏳',iconClass:'ni-update',tag:'Incoming',tagClass:'nt-update',title:'Future Windows Build',sub:`${fut.Windows} · ${fut.WindowsDate||'—'}`,time:'Live',category:'roblox'});
+  }
+  if(!notifs.length){
+    document.getElementById('notif-body').innerHTML='<div class="msg">Nothing here yet.</div>';
+    document.getElementById('notif-count').textContent='0 items';
+    return;
+  }
+  const badge=document.getElementById('notif-badge');
+  const detected=notifs.filter(n=>n.type==='detected').length;
+  if(detected>0){badge.textContent=detected;badge.classList.add('show');}
+  document.getElementById('notif-count').textContent=`${notifs.length} items`;
+  const rbxNotifs=notifs.filter(n=>n.category==='roblox');
+  const execNotifs=notifs.filter(n=>n.category==='executor');
+  let html='';
+  if(rbxNotifs.length){html+=`<div class="notif-section-label">Roblox</div>`;rbxNotifs.forEach((n,i)=>{html+=notifRow(n,i);});}
+  if(execNotifs.length){html+=`<div class="notif-section-label">Executors</div>`;execNotifs.forEach((n,i)=>{html+=notifRow(n,i+rbxNotifs.length);});}
+  document.getElementById('notif-body').innerHTML=html;
+  notifLoaded=true;
+}
+
+function notifRow(n,i){
+  return`<div class="notif" style="animation-delay:${i*0.035}s">
+    <div class="notif-icon ${n.iconClass}">${n.icon}</div>
+    <div class="notif-body">
+      <div class="notif-title">${n.title}<span class="notif-tag ${n.tagClass}">${n.tag}</span></div>
+      <div class="notif-sub">${n.sub}</div>
+    </div>
+    <div class="notif-time">${n.time}</div>
+  </div>`;
+}
+
+function loadNotifs(){
+  notifLoaded=true;
+  if(execLoaded&&rbxLoaded){buildNotifs();}
+  else{
+    document.getElementById('notif-body').innerHTML='<div class="msg">Fetching...</div>';
+    const check=setInterval(()=>{if(execLoaded&&rbxLoaded){clearInterval(check);buildNotifs();}},400);
+  }
 }
 </script>
 </body>
