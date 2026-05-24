@@ -1,9 +1,8 @@
 {
-  "redirects": [
+  "rewrites": [
     {
-      "source": "/:path*.lua",
-      "destination": "/403.html",
-      "permanent": false
+      "source": "/403",
+      "destination": "/403.html"
     }
   ]
 }
