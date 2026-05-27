@@ -240,6 +240,99 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
 .nt-detected{background:rgba(192,48,32,0.1);color:var(--r);}
 .nt-roblox{background:rgba(201,160,48,0.1);color:var(--y);}
 
+/* ── ScriptBlox ── */
+.sb-top{display:flex;gap:8px;padding:20px 0 0;align-items:center;flex-wrap:wrap;}
+.sb-search{
+  flex:1;min-width:180px;
+  display:flex;align-items:center;gap:10px;
+  background:var(--s1);border:1px solid var(--l2);border-radius:8px;
+  padding:0 14px;transition:border-color 0.15s;
+}
+.sb-search:focus-within{border-color:var(--d1);}
+.sb-search svg{opacity:0.35;flex-shrink:0;}
+.sb-search input{
+  flex:1;background:none;border:none;outline:none;
+  font-family:'Geist',sans-serif;font-size:12px;color:var(--fg);
+  padding:10px 0;
+}
+.sb-search input::placeholder{color:var(--d1);}
+.sb-mode{display:flex;gap:4px;}
+.sb-mode button{
+  padding:7px 13px;border-radius:6px;font-size:10px;font-weight:600;
+  font-family:'Geist Mono',monospace;letter-spacing:0.04em;
+  border:1px solid var(--l2);color:var(--d1);
+  transition:all 0.15s;
+}
+.sb-mode button:hover{color:var(--d3);border-color:var(--l3);}
+.sb-mode button.on{background:var(--fg);color:var(--bg);border-color:var(--fg);}
+.sb-filters{display:flex;gap:5px;padding:12px 0 16px;flex-wrap:wrap;border-bottom:1px solid var(--l1);}
+.sb-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:16px;}
+@media(max-width:560px){.sb-grid{grid-template-columns:1fr;}}
+.sb-card{
+  position:relative;
+  background:var(--s1);border:1px solid var(--l1);border-radius:10px;
+  overflow:hidden;cursor:pointer;
+  transition:border-color 0.18s,transform 0.18s,background 0.18s;
+  animation:cardIn 0.3s cubic-bezier(0.22,1,0.36,1) both;
+  display:flex;flex-direction:column;
+}
+.sb-card:hover{border-color:var(--l3);background:var(--s2);transform:translateY(-1px);}
+.sb-card-img{
+  width:100%;height:80px;object-fit:cover;opacity:0.55;
+  display:block;background:var(--l1);
+}
+.sb-card-img-placeholder{width:100%;height:80px;background:var(--l1);display:flex;align-items:center;justify-content:center;}
+.sb-card-body{padding:12px 14px 14px;flex:1;display:flex;flex-direction:column;gap:6px;}
+.sb-card-title{font-size:13px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;}
+.sb-card-game{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sb-card-meta{display:flex;gap:5px;flex-wrap:wrap;margin-top:2px;}
+.sb-card-foot{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--l1);}
+.sb-card-views{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1);}
+.sbtn-cp{padding:5px 12px;border-radius:5px;font-size:9px;font-weight:600;letter-spacing:0.02em;background:var(--l2);color:var(--d3);border:1px solid var(--l3);transition:all 0.15s;}
+.sbtn-cp:hover{background:var(--l3);color:var(--fg);}
+.sbtn-cp.ok{background:var(--g);color:#000;border-color:var(--g);}
+.sb-pagination{display:flex;align-items:center;justify-content:center;gap:8px;padding:28px 0 0;}
+.sb-pg-btn{
+  padding:7px 16px;border-radius:7px;font-size:10px;font-weight:600;
+  font-family:'Geist Mono',monospace;letter-spacing:0.04em;
+  border:1px solid var(--l2);color:var(--d2);
+  transition:all 0.15s;
+}
+.sb-pg-btn:hover:not(:disabled){color:var(--fg);border-color:var(--d1);}
+.sb-pg-btn:disabled{opacity:0.3;cursor:default;}
+.sb-pg-info{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1);letter-spacing:0.1em;}
+.sb-trending-label{
+  font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--d1);padding:20px 0 10px;
+}
+/* modal */
+.sb-modal-backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:200;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  animation:pageIn 0.15s ease both;
+}
+.sb-modal{
+  background:var(--s1);border:1px solid var(--l2);border-radius:14px;
+  width:100%;max-width:540px;max-height:80vh;overflow-y:auto;
+  animation:cardIn 0.2s cubic-bezier(0.22,1,0.36,1) both;
+}
+.sb-modal-img{width:100%;height:120px;object-fit:cover;opacity:0.5;border-radius:14px 14px 0 0;background:var(--l1);}
+.sb-modal-body{padding:20px 24px 24px;}
+.sb-modal-title{font-size:18px;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px;}
+.sb-modal-game{font-family:'Geist Mono',monospace;font-size:9px;color:var(--d2);margin-bottom:14px;}
+.sb-modal-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px;}
+.sb-modal-feat{font-size:12px;color:var(--d3);line-height:1.6;margin-bottom:18px;white-space:pre-wrap;}
+.sb-modal-actions{display:flex;gap:8px;}
+.sb-modal-close{
+  position:absolute;top:16px;right:16px;
+  width:28px;height:28px;border-radius:6px;
+  background:var(--l2);color:var(--d2);font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.15s;
+}
+.sb-modal-close:hover{background:var(--l3);color:var(--fg);}
+.sb-modal-wrap{position:relative;}
+
 .msg{padding:52px 0;text-align:center;font-family:'Geist Mono',monospace;font-size:10px;color:var(--d1);}
 .merr{color:var(--r);}
 
@@ -278,6 +371,9 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
     </button>
     <button class="tab" onclick="go('roblox',this)">
       <span class="tab-bg"></span>Roblox
+    </button>
+    <button class="tab" onclick="go('scriptblox',this)">
+      <span class="tab-bg"></span>ScriptBlox
     </button>
     <button class="tab" id="notif-tab" onclick="go('notifications',this)">
       <span class="tab-bg"></span>Inbox<span class="tab-badge" id="notif-badge"></span>
@@ -359,6 +455,48 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
     <div id="rbx-body"><div class="msg">Fetching...</div></div>
   </div>
 
+  <!-- ScriptBlox page -->
+  <div id="scriptblox" class="page">
+    <div class="sec"><h2>ScriptBlox</h2><span class="sec-tag" id="sb-count">—</span></div>
+    <div class="divider"></div>
+
+    <div class="sb-top">
+      <div class="sb-search">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6.5" cy="6.5" r="5"/><path d="M10.5 10.5L14 14"/></svg>
+        <input id="sb-q" type="text" placeholder="Search scripts..." autocomplete="off">
+      </div>
+      <div class="sb-mode">
+        <button class="on" onclick="sbMode('',this)">All</button>
+        <button onclick="sbMode('free',this)">Free</button>
+        <button onclick="sbMode('paid',this)">Paid</button>
+      </div>
+    </div>
+
+    <div class="sb-filters">
+      <button class="f on" onclick="sbFilt('none',this)">Latest</button>
+      <button class="f" onclick="sbFilt('views',this)">Views</button>
+      <button class="f" onclick="sbFilt('likeCount',this)">Likes</button>
+      <button class="f" onclick="sbFilt('patched',this)">Hide Patched</button>
+      <button class="f" onclick="sbFilt('key',this)">No Key</button>
+      <button class="f" onclick="sbFilt('universal',this)">Universal</button>
+      <button class="f" onclick="sbFilt('verified',this)">Verified</button>
+    </div>
+
+    <div id="sb-trending-wrap">
+      <div class="sb-trending-label">Trending</div>
+      <div id="sb-trending-grid" class="sb-grid"><div class="msg">Fetching...</div></div>
+    </div>
+
+    <div id="sb-results-wrap" style="display:none;">
+      <div id="sb-results-grid" class="sb-grid"></div>
+      <div class="sb-pagination">
+        <button class="sb-pg-btn" id="sb-prev" onclick="sbPage(-1)" disabled>← Prev</button>
+        <span class="sb-pg-info" id="sb-pg-info">Page 1</span>
+        <button class="sb-pg-btn" id="sb-next" onclick="sbPage(1)">Next →</button>
+      </div>
+    </div>
+  </div>
+
   <div id="notifications" class="page">
     <div class="sec"><h2>Inbox</h2><span class="sec-tag" id="notif-count">Loading...</span></div>
     <div class="divider"></div>
@@ -367,21 +505,21 @@ button{font-family:'Geist',sans-serif;cursor:pointer;border:none;background:none
 
 </div>
 
+<!-- ScriptBlox modal -->
+<div id="sb-modal-backdrop" class="sb-modal-backdrop" style="display:none;" onclick="sbCloseModal(event)">
+  <div class="sb-modal-wrap">
+    <div class="sb-modal" id="sb-modal">
+      <button class="sb-modal-close" onclick="sbCloseModal(true)">✕</button>
+      <div id="sb-modal-content"></div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast">Copied</div>
 
 <script>
-const PLAT_ICONS={
-  Windows:'win.png',
-  Mac:'mac.png',
-  Android:'android.png',
-  iOS:'ios.png',
-};
-
-function platIcon(name){
-  const src=PLAT_ICONS[name];
-  if(!src)return'';
-  return`<img src="${src}" class="plat-icon" alt="${name}">`;
-}
+const PLAT_ICONS={Windows:'win.png',Mac:'mac.png',Android:'android.png',iOS:'ios.png'};
+function platIcon(name){const src=PLAT_ICONS[name];if(!src)return'';return`<img src="${src}" class="plat-icon" alt="${name}">`;}
 
 function go(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
@@ -390,6 +528,7 @@ function go(id,btn){
   if(btn)btn.classList.add('on');
   if(id==='executors'&&!execLoaded)loadExecs();
   if(id==='roblox'&&!rbxLoaded)loadRbx();
+  if(id==='scriptblox'&&!sbLoaded)initSb();
   if(id==='notifications'){
     const badge=document.getElementById('notif-badge');
     badge.textContent='';badge.classList.remove('show');
@@ -404,29 +543,23 @@ function cp(btn,text){
   const t=document.getElementById('toast');t.classList.add('show');
   setTimeout(()=>{t.classList.remove('show');btn.textContent='Copy';btn.classList.remove('ok');},1800);
 }
-
-function fb(s){
-  const ta=document.createElement('textarea');
-  ta.value=s;ta.style.cssText='position:fixed;opacity:0';
-  document.body.appendChild(ta);ta.select();
-  document.execCommand('copy');document.body.removeChild(ta);
+function cpRaw(btn,text){
+  navigator.clipboard?navigator.clipboard.writeText(text).catch(()=>fb(text)):fb(text);
+  btn.textContent='Copied!';btn.classList.add('ok');
+  const t=document.getElementById('toast');t.classList.add('show');
+  setTimeout(()=>{t.classList.remove('show');btn.textContent='Copy Script';btn.classList.remove('ok');},1800);
 }
+function fb(s){const ta=document.createElement('textarea');ta.value=s;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}
 
 let execData=[],execLoaded=false,curFilt='all';
-
 async function loadExecs(){
   execLoaded=true;
   try{
     const r=await fetch('https://weao.xyz/api/status/exploits',{headers:{'User-Agent':'WEAO-3PService'}});
     if(!r.ok)throw new Error('HTTP '+r.status);
-    execData=await r.json();
-    renderExecs();
-    buildNotifs();
-  }catch(e){
-    document.getElementById('exec-body').innerHTML=`<tr><td colspan="6"><div class="msg merr">Failed — ${e.message}</div></td></tr>`;
-  }
+    execData=await r.json();renderExecs();buildNotifs();
+  }catch(e){document.getElementById('exec-body').innerHTML=`<tr><td colspan="6"><div class="msg merr">Failed — ${e.message}</div></td></tr>`;}
 }
-
 function renderExecs(){
   let d=[...execData];
   if(curFilt==='free')d=d.filter(e=>e.free);
@@ -437,17 +570,13 @@ function renderExecs(){
   document.getElementById('exec-body').innerHTML=d.map((e,i)=>`
     <tr style="animation-delay:${i*0.02}s">
       <td style="font-family:'Geist Mono',monospace;font-size:9px;color:var(--d1)">${i+1}</td>
-      <td>
-        <div class="en">${e.title}</div>
-        <div class="esub">${e.platform?`${platIcon(e.platform)}${e.platform}`:''}${e.version?` · ${e.version}`:''}</div>
-      </td>
+      <td><div class="en">${e.title}</div><div class="esub">${e.platform?`${platIcon(e.platform)}${e.platform}`:''}${e.version?` · ${e.version}`:''}</div></td>
       <td>${e.free?'<span class="chip cf">Free</span>':`<span class="chip cp">${e.cost||'Paid'}</span>`}</td>
       <td>${e.detected?'<span class="chip cd">Detected</span>':'<span class="chip cs">Safe</span>'}</td>
       <td>${e.updateStatus?'<span class="chip cu">Updated</span>':'<span class="chip co">Outdated</span>'}</td>
       <td class="unc">${e.uncPercentage!=null?`<b>${e.uncPercentage}</b>%`:'—'}</td>
     </tr>`).join('');
 }
-
 function filt(f,btn){
   curFilt=f;
   document.querySelectorAll('.f').forEach(b=>b.classList.remove('on'));
@@ -456,7 +585,6 @@ function filt(f,btn){
 }
 
 let rbxLoaded=false,rbxData=null;
-
 async function loadRbx(){
   rbxLoaded=true;
   try{
@@ -472,23 +600,211 @@ async function loadRbx(){
       ${vc('Past',[['Windows',past.Windows,past.WindowsDate],['Mac',past.Mac,past.MacDate]])}
     </div>`;
     buildNotifs();
-  }catch(e){
-    document.getElementById('rbx-body').innerHTML=`<div class="msg merr">Failed — ${e.message}</div>`;
-  }
+  }catch(e){document.getElementById('rbx-body').innerHTML=`<div class="msg merr">Failed — ${e.message}</div>`;}
 }
-
 function vc(t,rows){
   return`<div class="vcard"><div class="vcard-h">${t}</div>${rows.map(([p,v,d])=>`
     <div class="vrow">
-      <div class="vrow-left">
-        ${platIcon(p)}<div><div class="vplat">${p}</div><div class="vdate">${d||'—'}</div></div>
-      </div>
+      <div class="vrow-left">${platIcon(p)}<div><div class="vplat">${p}</div><div class="vdate">${d||'—'}</div></div></div>
       <div class="vver">${v||'—'}</div>
     </div>`).join('')}</div>`;
 }
 
-let notifLoaded=false;
+// ── ScriptBlox ──
+let sbLoaded=false,sbPage_=1,sbTotalPages=1,sbMode_='',sbFilt_='none',sbQ='',sbSearchTimeout=null;
 
+async function initSb(){
+  sbLoaded=true;
+  loadSbTrending();
+  const inp=document.getElementById('sb-q');
+  inp.addEventListener('input',()=>{
+    clearTimeout(sbSearchTimeout);
+    sbSearchTimeout=setTimeout(()=>{
+      sbQ=inp.value.trim();
+      sbPage_=1;
+      sbRender();
+    },420);
+  });
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter'){clearTimeout(sbSearchTimeout);sbQ=inp.value.trim();sbPage_=1;sbRender();}});
+}
+
+async function loadSbTrending(){
+  try{
+    const r=await fetch('https://scriptblox.com/api/script/trending');
+    const d=await r.json();
+    const scripts=d?.result?.scripts||[];
+    if(!scripts.length){document.getElementById('sb-trending-grid').innerHTML='<div class="msg">No trending scripts.</div>';return;}
+    document.getElementById('sb-trending-grid').innerHTML=scripts.slice(0,6).map((s,i)=>sbCardHTML(s,i)).join('');
+    document.getElementById('sb-count').textContent=`${scripts.length} trending`;
+  }catch(e){
+    document.getElementById('sb-trending-grid').innerHTML=`<div class="msg merr">Failed — ${e.message}</div>`;
+  }
+}
+
+async function sbRender(){
+  const hasQuery=sbQ.length>0;
+  const hasFilt=sbFilt_!=='none'&&sbFilt_!=='views'&&sbFilt_!=='likeCount';
+  const hasMode=sbMode_!=='';
+  const showResults=hasQuery||hasFilt||hasMode||sbFilt_==='views'||sbFilt_==='likeCount';
+
+  if(!showResults){
+    document.getElementById('sb-trending-wrap').style.display='';
+    document.getElementById('sb-results-wrap').style.display='none';
+    document.getElementById('sb-count').textContent='';
+    return;
+  }
+
+  document.getElementById('sb-trending-wrap').style.display='none';
+  document.getElementById('sb-results-wrap').style.display='';
+  document.getElementById('sb-results-grid').innerHTML='<div class="msg">Fetching...</div>';
+
+  try{
+    let url,params=new URLSearchParams();
+    params.set('page',sbPage_);
+    params.set('max',20);
+    if(sbMode_)params.set('mode',sbMode_);
+    if(sbFilt_==='patched')params.set('patched',0);
+    if(sbFilt_==='key')params.set('key',0);
+    if(sbFilt_==='universal')params.set('universal',1);
+    if(sbFilt_==='verified')params.set('verified',1);
+    if(sbFilt_==='views')params.set('sortBy','views');
+    if(sbFilt_==='likeCount')params.set('sortBy','likeCount');
+
+    if(hasQuery){
+      url=`https://scriptblox.com/api/script/search?q=${encodeURIComponent(sbQ)}&${params}`;
+    }else{
+      url=`https://scriptblox.com/api/script/fetch?${params}`;
+    }
+
+    const r=await fetch(url);
+    const d=await r.json();
+    if(d.message)throw new Error(d.message);
+    const scripts=d?.result?.scripts||[];
+    sbTotalPages=d?.result?.totalPages||1;
+
+    document.getElementById('sb-count').textContent=`${scripts.length} results`;
+    document.getElementById('sb-pg-info').textContent=`Page ${sbPage_} / ${sbTotalPages}`;
+    document.getElementById('sb-prev').disabled=sbPage_<=1;
+    document.getElementById('sb-next').disabled=sbPage_>=sbTotalPages;
+
+    if(!scripts.length){document.getElementById('sb-results-grid').innerHTML='<div class="msg">No scripts found.</div>';return;}
+    document.getElementById('sb-results-grid').innerHTML=scripts.map((s,i)=>sbCardHTML(s,i)).join('');
+  }catch(e){
+    document.getElementById('sb-results-grid').innerHTML=`<div class="msg merr">Failed — ${e.message}</div>`;
+  }
+}
+
+function sbPage(dir){
+  sbPage_=Math.max(1,Math.min(sbTotalPages,sbPage_+dir));
+  sbRender();
+  document.getElementById('scriptblox').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function sbMode(m,btn){
+  sbMode_=m;
+  document.querySelectorAll('.sb-mode button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  sbPage_=1;sbRender();
+}
+
+function sbFilt(f,btn){
+  sbFilt_=f;
+  document.querySelectorAll('.sb-filters .f').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  sbPage_=1;sbRender();
+}
+
+function sbCardHTML(s,i){
+  const gameImg=s.game?.imageUrl?`<img class="sb-card-img" src="${s.game.imageUrl}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div class="sb-card-img-placeholder"></div>`;
+  const chips=[];
+  if(s.scriptType==='free')chips.push('<span class="chip cf">Free</span>');
+  else if(s.scriptType==='paid')chips.push('<span class="chip cp">Paid</span>');
+  if(s.isPatched)chips.push('<span class="chip cd">Patched</span>');
+  if(s.verified)chips.push('<span class="chip cu">Verified</span>');
+  if(s.key)chips.push('<span class="chip co">Key</span>');
+  if(s.isUniversal)chips.push('<span class="chip cs">Universal</span>');
+  const views=s.views?`${Number(s.views).toLocaleString()} views`:'';
+  const slug=s.slug||s._id;
+  return`<div class="sb-card" style="animation-delay:${i*0.025}s" onclick="sbOpenModal('${slug}')">
+    ${gameImg}
+    <div class="sb-card-body">
+      <div class="sb-card-title">${esc(s.title)}</div>
+      <div class="sb-card-game">${esc(s.game?.name||'Unknown game')}</div>
+      <div class="sb-card-meta">${chips.join('')}</div>
+    </div>
+    <div class="sb-card-foot">
+      <span class="sb-card-views">${views}</span>
+      <button class="sbtn-cp" onclick="event.stopPropagation();sbCopyCard(this,'${slug}')">Copy</button>
+    </div>
+  </div>`;
+}
+
+async function sbCopyCard(btn,slug){
+  btn.textContent='...';
+  try{
+    const r=await fetch(`https://scriptblox.com/api/script/raw/${slug}`);
+    const text=await r.text();
+    navigator.clipboard?navigator.clipboard.writeText(text).catch(()=>fb(text)):fb(text);
+    btn.textContent='Copied!';btn.classList.add('ok');
+    const t=document.getElementById('toast');t.classList.add('show');
+    setTimeout(()=>{t.classList.remove('show');btn.textContent='Copy';btn.classList.remove('ok');},1800);
+  }catch(e){btn.textContent='Error';}
+}
+
+async function sbOpenModal(slug){
+  const bd=document.getElementById('sb-modal-backdrop');
+  const mc=document.getElementById('sb-modal-content');
+  mc.innerHTML='<div class="msg">Loading...</div>';
+  bd.style.display='flex';
+  try{
+    const r=await fetch(`https://scriptblox.com/api/script/${slug}`);
+    const d=await r.json();
+    const s=d.script||d;
+    const chips=[];
+    if(s.scriptType==='free')chips.push('<span class="chip cf">Free</span>');
+    else if(s.scriptType==='paid')chips.push('<span class="chip cp">Paid</span>');
+    if(s.isPatched)chips.push('<span class="chip cd">Patched</span>');
+    if(s.verified)chips.push('<span class="chip cu">Verified</span>');
+    if(s.key)chips.push('<span class="chip co">Key</span>');
+    if(s.isUniversal)chips.push('<span class="chip cs">Universal</span>');
+    const tags=(s.tags||[]).map(t=>`<span class="chip" style="background:var(--l2);color:var(--d3)">${esc(t)}</span>`).join('');
+    const imgHtml=s.image?`<img class="sb-modal-img" src="${s.image}" alt="" onerror="this.style.display='none'">`:'';
+    mc.innerHTML=`${imgHtml}
+    <div class="sb-modal-body">
+      <div class="sb-modal-title">${esc(s.title||'')}</div>
+      <div class="sb-modal-game">${esc(s.game?.name||'')} ${s.game?.gameId?`· <a href="https://www.roblox.com/games/${s.game.gameId}" target="_blank" style="color:var(--b);text-decoration:none">Open Game ↗</a>`:''}</div>
+      <div class="sb-modal-tags">${chips}${tags}</div>
+      ${s.features?`<div class="sb-modal-feat">${esc(s.features)}</div>`:''}
+      <div class="sb-modal-actions">
+        <button class="btn btn-solid" id="sb-modal-cpbtn" onclick="sbModalCopy(this,'${slug}')">Copy Script</button>
+        <a href="https://scriptblox.com/script/${slug}" target="_blank" class="btn btn-outline" style="text-decoration:none;display:inline-flex;align-items:center;">View on ScriptBlox ↗</a>
+      </div>
+    </div>`;
+  }catch(e){mc.innerHTML=`<div class="msg merr">Failed — ${e.message}</div>`;}
+}
+
+async function sbModalCopy(btn,slug){
+  btn.textContent='Copying...';
+  try{
+    const r=await fetch(`https://scriptblox.com/api/script/raw/${slug}`);
+    const text=await r.text();
+    navigator.clipboard?navigator.clipboard.writeText(text).catch(()=>fb(text)):fb(text);
+    btn.textContent='Copied!';btn.classList.add('ok');
+    const t=document.getElementById('toast');t.classList.add('show');
+    setTimeout(()=>{t.classList.remove('show');btn.textContent='Copy Script';btn.classList.remove('ok');},1800);
+  }catch(e){btn.textContent='Error';}
+}
+
+function sbCloseModal(e){
+  if(e===true||e.target===document.getElementById('sb-modal-backdrop')){
+    document.getElementById('sb-modal-backdrop').style.display='none';
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('sb-modal-backdrop').style.display='none';});
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+let notifLoaded=false;
 window.addEventListener('load',()=>{
   if(!execLoaded)loadExecs();
   if(!rbxLoaded)loadRbx();
@@ -500,12 +816,8 @@ function buildNotifs(){
   if(!hasExec&&!hasRbx)return;
   const notifs=[];
   if(hasExec){
-    execData.filter(e=>e.detected).forEach(e=>{
-      notifs.push({type:'detected',iconSrc:'win.png',iconClass:'ni-detected',tag:'Detected',tagClass:'nt-detected',title:e.title,sub:`Flagged · ${e.platform||'Unknown'}`,time:'Live',category:'executor',platform:e.platform});
-    });
-    execData.filter(e=>e.updateStatus).forEach(e=>{
-      notifs.push({type:'update',iconSrc:PLAT_ICONS[e.platform]||null,iconClass:'ni-update',tag:'Updated',tagClass:'nt-update',title:e.title,sub:`${e.version||'Latest'} · ${e.platform||'Unknown'}`,time:'Live',category:'executor',platform:e.platform});
-    });
+    execData.filter(e=>e.detected).forEach(e=>{notifs.push({type:'detected',iconSrc:'win.png',iconClass:'ni-detected',tag:'Detected',tagClass:'nt-detected',title:e.title,sub:`Flagged · ${e.platform||'Unknown'}`,time:'Live',category:'executor',platform:e.platform});});
+    execData.filter(e=>e.updateStatus).forEach(e=>{notifs.push({type:'update',iconSrc:PLAT_ICONS[e.platform]||null,iconClass:'ni-update',tag:'Updated',tagClass:'nt-update',title:e.title,sub:`${e.version||'Latest'} · ${e.platform||'Unknown'}`,time:'Live',category:'executor',platform:e.platform});});
   }
   if(hasRbx){
     const{cur,fut}=rbxData;
@@ -513,11 +825,7 @@ function buildNotifs(){
     if(cur.Mac)notifs.push({type:'roblox',iconSrc:'mac.png',iconClass:'ni-roblox',tag:'Roblox',tagClass:'nt-roblox',title:'Mac Client',sub:`${cur.Mac} · ${cur.MacDate||'—'}`,time:'Live',category:'roblox'});
     if(fut.Windows)notifs.push({type:'update',iconSrc:'win.png',iconClass:'ni-update',tag:'Incoming',tagClass:'nt-update',title:'Future Windows Build',sub:`${fut.Windows} · ${fut.WindowsDate||'—'}`,time:'Live',category:'roblox'});
   }
-  if(!notifs.length){
-    document.getElementById('notif-body').innerHTML='<div class="msg">Nothing here yet.</div>';
-    document.getElementById('notif-count').textContent='0 items';
-    return;
-  }
+  if(!notifs.length){document.getElementById('notif-body').innerHTML='<div class="msg">Nothing here yet.</div>';document.getElementById('notif-count').textContent='0 items';return;}
   const badge=document.getElementById('notif-badge');
   const detected=notifs.filter(n=>n.type==='detected').length;
   if(detected>0){badge.textContent=detected;badge.classList.add('show');}
@@ -530,7 +838,6 @@ function buildNotifs(){
   document.getElementById('notif-body').innerHTML=html;
   notifLoaded=true;
 }
-
 function notifRow(n,i){
   const iconContent=n.iconSrc?`<img src="${n.iconSrc}" alt="" style="width:14px;height:14px;object-fit:contain;opacity:0.75;">`:'';
   return`<div class="notif" style="animation-delay:${i*0.035}s">
@@ -542,7 +849,6 @@ function notifRow(n,i){
     <div class="notif-time">${n.time}</div>
   </div>`;
 }
-
 function loadNotifs(){
   notifLoaded=true;
   if(execLoaded&&rbxLoaded){buildNotifs();}
