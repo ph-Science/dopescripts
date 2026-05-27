@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>dope | RBX</title>
+<title>dope | 👅</title>
 <link rel="icon" type="image/x-icon" href="lulwut.ico">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -406,7 +406,7 @@ a{color:inherit;text-decoration:none;}
 <aside class="sidebar">
   <div class="sb-brand">
     <div class="sb-brand-name">dope</div>
-    <div class="sb-brand-sub">RBX Hub</div>
+    <div class="sb-brand-sub">  Hub</div>
   </div>
   <nav class="sb-nav">
     <div class="sb-section-label">Navigation</div>
@@ -550,7 +550,7 @@ a{color:inherit;text-decoration:none;}
   <div id="roblox" class="page">
     <div class="sec"><h2>Roblox Versions</h2><span class="sec-tag">Live</span></div>
     <div class="divider"></div>
-    <div id="rbx-body"><div class="msg">Fetching...</div></div>
+    <div id=" -body"><div class="msg">Fetching...</div></div>
   </div>
 
   <div id="notifications" class="page">
@@ -583,7 +583,7 @@ function go(id,el){
   document.getElementById(id).classList.add('on');
   if(el)el.classList.add('on');
   if(id==='executors'&&!execLoaded)loadExecs();
-  if(id==='roblox'&&!rbxLoaded)loadRbx();
+  if(id==='roblox'&&! Loaded)load ();
   if(id==='scripts'&&!sbLoaded)initSb();
   if(id==='notifications'){
     const badge=document.getElementById('notif-badge');
@@ -634,23 +634,23 @@ function filt(f,btn){
   if(execLoaded&&execData.length)renderExecs();
 }
 
-let rbxLoaded=false,rbxData=null;
-async function loadRbx(){
-  rbxLoaded=true;
+let  Loaded=false, Data=null;
+async function load (){
+   Loaded=true;
   try{
     const [cur,fut,past]=await Promise.all([
       fetch('https://weao.xyz/api/versions/current',{headers:{'User-Agent':'WEAO-3PService'}}).then(r=>r.json()),
       fetch('https://weao.xyz/api/versions/future',{headers:{'User-Agent':'WEAO-3PService'}}).then(r=>r.json()),
       fetch('https://weao.xyz/api/versions/past',{headers:{'User-Agent':'WEAO-3PService'}}).then(r=>r.json()),
     ]);
-    rbxData={cur,fut,past};
-    document.getElementById('rbx-body').innerHTML=`<div class="vgrid">
+     Data={cur,fut,past};
+    document.getElementById(' -body').innerHTML=`<div class="vgrid">
       ${vc('Current',[['Windows',cur.Windows,cur.WindowsDate],['Mac',cur.Mac,cur.MacDate],['Android',cur.Android,cur.AndroidDate],['iOS',cur.iOS,cur.iOSDate]])}
       ${vc('Future',[['Windows',fut.Windows,fut.WindowsDate],['Mac',fut.Mac,fut.MacDate]])}
       ${vc('Past',[['Windows',past.Windows,past.WindowsDate],['Mac',past.Mac,past.MacDate]])}
     </div>`;
     buildNotifs();
-  }catch(e){document.getElementById('rbx-body').innerHTML=`<div class="msg merr">Failed — ${e.message}</div>`;}
+  }catch(e){document.getElementById(' -body').innerHTML=`<div class="msg merr">Failed — ${e.message}</div>`;}
 }
 function vc(t,rows){
   return`<div class="vcard"><div class="vcard-h">${t}</div>${rows.map(([p,v,d])=>`
@@ -823,21 +823,21 @@ function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').
 let notifLoaded=false;
 window.addEventListener('load',()=>{
   if(!execLoaded)loadExecs();
-  if(!rbxLoaded)loadRbx();
+  if(! Loaded)load ();
   initSb();
 });
 
 function buildNotifs(){
   const hasExec=execLoaded&&execData.length>0;
-  const hasRbx=rbxLoaded&&rbxData;
-  if(!hasExec&&!hasRbx)return;
+  const has = Loaded&& Data;
+  if(!hasExec&&!has )return;
   const notifs=[];
   if(hasExec){
     execData.filter(e=>e.detected).forEach(e=>{notifs.push({type:'detected',iconSrc:'win.png',iconClass:'ni-detected',tag:'Detected',tagClass:'nt-detected',title:e.title,sub:`Flagged · ${e.platform||'Unknown'}`,time:'Live',category:'executor'});});
     execData.filter(e=>e.updateStatus).forEach(e=>{notifs.push({type:'update',iconSrc:PLAT_ICONS[e.platform]||null,iconClass:'ni-update',tag:'Updated',tagClass:'nt-update',title:e.title,sub:`${e.version||'Latest'} · ${e.platform||'Unknown'}`,time:'Live',category:'executor'});});
   }
-  if(hasRbx){
-    const{cur,fut}=rbxData;
+  if(has ){
+    const{cur,fut}= Data;
     if(cur.Windows)notifs.push({type:'roblox',iconSrc:'win.png',iconClass:'ni-roblox',tag:'Roblox',tagClass:'nt-roblox',title:'Windows Client',sub:`${cur.Windows} · ${cur.WindowsDate||'—'}`,time:'Live',category:'roblox'});
     if(cur.Mac)notifs.push({type:'roblox',iconSrc:'mac.png',iconClass:'ni-roblox',tag:'Roblox',tagClass:'nt-roblox',title:'Mac Client',sub:`${cur.Mac} · ${cur.MacDate||'—'}`,time:'Live',category:'roblox'});
     if(fut.Windows)notifs.push({type:'update',iconSrc:'win.png',iconClass:'ni-update',tag:'Incoming',tagClass:'nt-update',title:'Future Windows Build',sub:`${fut.Windows} · ${fut.WindowsDate||'—'}`,time:'Live',category:'roblox'});
@@ -847,11 +847,11 @@ function buildNotifs(){
   const detected=notifs.filter(n=>n.type==='detected').length;
   if(detected>0){badge.textContent=detected;badge.classList.add('show');}
   document.getElementById('notif-count').textContent=`${notifs.length} items`;
-  const rbxNotifs=notifs.filter(n=>n.category==='roblox');
+  const  Notifs=notifs.filter(n=>n.category==='roblox');
   const execNotifs=notifs.filter(n=>n.category==='executor');
   let html='';
-  if(rbxNotifs.length){html+=`<div class="notif-section-label">Roblox</div>`;rbxNotifs.forEach((n,i)=>{html+=notifRow(n,i);});}
-  if(execNotifs.length){html+=`<div class="notif-section-label">Executors</div>`;execNotifs.forEach((n,i)=>{html+=notifRow(n,i+rbxNotifs.length);});}
+  if( Notifs.length){html+=`<div class="notif-section-label">Roblox</div>`; Notifs.forEach((n,i)=>{html+=notifRow(n,i);});}
+  if(execNotifs.length){html+=`<div class="notif-section-label">Executors</div>`;execNotifs.forEach((n,i)=>{html+=notifRow(n,i+ Notifs.length);});}
   document.getElementById('notif-body').innerHTML=html;
   notifLoaded=true;
 }
@@ -868,10 +868,10 @@ function notifRow(n,i){
 }
 function loadNotifs(){
   notifLoaded=true;
-  if(execLoaded&&rbxLoaded){buildNotifs();}
+  if(execLoaded&& Loaded){buildNotifs();}
   else{
     document.getElementById('notif-body').innerHTML='<div class="msg">Fetching...</div>';
-    const check=setInterval(()=>{if(execLoaded&&rbxLoaded){clearInterval(check);buildNotifs();}},400);
+    const check=setInterval(()=>{if(execLoaded&& Loaded){clearInterval(check);buildNotifs();}},400);
   }
 }
 </script>
